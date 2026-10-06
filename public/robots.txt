@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /download-processing/
+
+Sitemap: https://save-froms.net/sitemap.xml
