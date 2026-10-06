@@ -111,7 +111,13 @@ Route::get('/download-file/{token}', function (Request $request, string $token) 
         }
         $stream->close();
     }, $upstream->status(), $responseHeaders);
-})->middleware('throttle:20,1')->name('download.file');
+})->middleware('throttle:20,1')->withoutMiddleware([
+    \App\Http\Middleware\EncryptCookies::class,
+    \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+    \Illuminate\Session\Middleware\StartSession::class,
+    \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+    \App\Http\Middleware\VerifyCsrfToken::class,
+])->name('download.file');
 
 Route::get('/prepare-download/{token}', function (Request $request, string $token) {
     $cached = Cache::get('vidssave_prepare:'.$token);
