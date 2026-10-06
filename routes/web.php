@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use App\Services\SitemapGenerator;
 
 Route::get('/', function () {
     return view('home', [
@@ -107,26 +108,7 @@ Route::get('/robots.txt', function () {
 });
 
 Route::get('/sitemap.xml', function () {
-    $urls = collect(['/', '/supported-sites', '/faq', '/blog', '/about', '/contact', '/privacy-policy', '/terms-of-service'])
-        ->map(function ($path) { return ['path' => $path, 'lastmod' => null]; });
-    SupportedSite::active()->get(['slug', 'updated_at'])->each(function ($site) use ($urls) {
-        $urls->push(['path' => '/'.$site->slug, 'lastmod' => $site->updated_at]);
-    });
-    LandingPage::active()->get(['slug', 'updated_at'])->each(function ($page) use ($urls) {
-        $urls->push(['path' => '/'.$page->slug, 'lastmod' => $page->updated_at]);
-    });
-    BlogPost::published()->get(['slug', 'updated_at'])->each(function ($post) use ($urls) {
-        $urls->push(['path' => '/blog/'.$post->slug, 'lastmod' => $post->updated_at]);
-    });
-    $xml = '<?xml version="1.0" encoding="UTF-8"?>'."\n".'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-    foreach ($urls as $item) {
-        $path = $item['path'];
-        $xml .= '<url><loc>'.e(url($path)).'</loc>';
-        if ($item['lastmod']) $xml .= '<lastmod>'.$item['lastmod']->toAtomString().'</lastmod>';
-        $xml .= '<changefreq>'.($path === '/blog' ? 'daily' : 'weekly').'</changefreq><priority>'.($path === '/' ? '1.0' : '0.8').'</priority></url>';
-    }
-    $xml .= '</urlset>';
-    return response($xml, 200, [
+    return response(app(SitemapGenerator::class)->xml(), 200, [
         'Content-Type' => 'application/xml; charset=UTF-8',
         'Cache-Control' => 'public, max-age=3600',
     ]);

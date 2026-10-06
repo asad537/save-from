@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\SupportedSite;
+use App\Services\SitemapGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
@@ -23,6 +24,7 @@ class SupportedSiteController extends Controller
     public function store(Request $request)
     {
         SupportedSite::create($this->validated($request));
+        app(SitemapGenerator::class)->write();
         return redirect()->route('admin.sites.index')->with('status', 'Supported site added successfully.');
     }
 
@@ -34,12 +36,14 @@ class SupportedSiteController extends Controller
     public function update(Request $request, SupportedSite $site)
     {
         $site->update($this->validated($request, $site));
+        app(SitemapGenerator::class)->write();
         return redirect()->route('admin.sites.index')->with('status', 'Supported site updated successfully.');
     }
 
     public function destroy(SupportedSite $site)
     {
         $site->delete();
+        app(SitemapGenerator::class)->write();
         return redirect()->route('admin.sites.index')->with('status', 'Supported site deleted.');
     }
 

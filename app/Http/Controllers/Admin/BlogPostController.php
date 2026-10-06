@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\BlogPost;
+use App\Services\SitemapGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -26,6 +27,7 @@ class BlogPostController extends Controller
         $data = $this->validated($request);
         $data['featured_image'] = $this->imageValue($request);
         BlogPost::create($data);
+        app(SitemapGenerator::class)->write();
 
         return redirect()->route('admin.blog.index')->with('status', 'Blog post created successfully.');
     }
@@ -40,6 +42,7 @@ class BlogPostController extends Controller
         $data = $this->validated($request, $post);
         $data['featured_image'] = $this->imageValue($request, $post);
         $post->update($data);
+        app(SitemapGenerator::class)->write();
 
         return redirect()->route('admin.blog.index')->with('status', 'Blog post updated successfully.');
     }
@@ -48,6 +51,7 @@ class BlogPostController extends Controller
     {
         $this->deleteLocalImage($post->featured_image);
         $post->delete();
+        app(SitemapGenerator::class)->write();
 
         return redirect()->route('admin.blog.index')->with('status', 'Blog post deleted.');
     }
