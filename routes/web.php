@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use App\Services\SitemapGenerator;
 
 Route::get('/', function () {
@@ -47,12 +48,69 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 Route::get('/download-file/{token}', function (Request $request, string $token) {
-    $download = Cache::pull('direct_download:'.$token);
+    $download = Cache::get('direct_download:'.$token);
     if (!$download || empty($download['url']) || !filter_var($download['url'], FILTER_VALIDATE_URL)) {
         return response()->view('download-error', ['message' => 'This download request has expired. Please analyze the link again.'], 410);
     }
+
+    $url = $download['url'];
+    $host = strtolower((string) parse_url($url, PHP_URL_HOST));
+    if (parse_url($url, PHP_URL_SCHEME) !== 'https' || !($host === 'vidssave.com' || Str::endsWith($host, '.vidssave.com'))) {
+        Log::warning('Blocked an unexpected media download host', ['host' => $host]);
+        return response()->view('download-error', ['message' => 'The media provider returned an invalid download address. Please analyze the link again.'], 502);
+    }
+
+    $headers = [
+        'User-Agent' => (string) $request->userAgent(),
+        'Accept' => '*/*',
+    ];
+    if ($request->headers->has('range')) {
+        $headers['Range'] = $request->header('range');
+    }
+
+    try {
+        $upstream = Http::withHeaders($headers)->withOptions([
+            'stream' => true,
+            'connect_timeout' => 20,
+            'timeout' => 0,
+        ])->get($url);
+    } catch (\Throwable $exception) {
+        report($exception);
+        return response()->view('download-error', ['message' => 'The media file could not be reached. Please try this quality again.'], 502);
+    }
+
+    if (!in_array($upstream->status(), [200, 206], true)) {
+        Log::warning('Media download upstream rejected request', ['host' => $host, 'status' => $upstream->status()]);
+        return response()->view('download-error', ['message' => 'This download link is no longer available. Please analyze the media link again.'], 502);
+    }
+
     AnalyticsEvent::recordDownload($request, $download['meta'] ?? []);
-    return redirect()->away($download['url']);
+    $psrResponse = $upstream->toPsrResponse();
+    $stream = $psrResponse->getBody();
+    $responseHeaders = [];
+    foreach (['Content-Type', 'Content-Length', 'Content-Range', 'Accept-Ranges', 'Content-Disposition', 'ETag', 'Last-Modified'] as $header) {
+        if ($psrResponse->hasHeader($header)) {
+            $value = $psrResponse->getHeaderLine($header);
+            if ($header === 'Content-Disposition') {
+                $value = str_ireplace('vidssave.com', 'save-froms.net', $value);
+            }
+            $responseHeaders[$header] = $value;
+        }
+    }
+    $responseHeaders['Cache-Control'] = 'private, no-store, max-age=0';
+    $responseHeaders['X-Content-Type-Options'] = 'nosniff';
+
+    return response()->stream(function () use ($stream) {
+        @set_time_limit(0);
+        while (!$stream->eof()) {
+            echo $stream->read(1024 * 1024);
+            if (ob_get_level() > 0) {
+                @ob_flush();
+            }
+            flush();
+        }
+        $stream->close();
+    }, $upstream->status(), $responseHeaders);
 })->middleware('throttle:20,1')->name('download.file');
 
 Route::get('/prepare-download/{token}', function (Request $request, string $token) {
@@ -79,8 +137,9 @@ Route::get('/prepare-download/{token}', function (Request $request, string $toke
         return response()->view('download-error', ['message' => 'This quality is temporarily unavailable. Please choose another quality or try again with a different public link.'], 502);
     }
     Cache::forget('vidssave_prepare:'.$token);
-    AnalyticsEvent::recordDownload($request, $meta);
-    return redirect()->away($download);
+    $directToken = Str::random(40);
+    Cache::put('direct_download:'.$directToken, ['url' => $download, 'meta' => $meta], now()->addMinutes(20));
+    return redirect()->route('download.file', $directToken);
 })->middleware('throttle:10,1')->name('download.prepare');
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
