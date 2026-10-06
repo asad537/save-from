@@ -5,8 +5,8 @@
 
     RewriteEngine On
 
-    # Keep one canonical production host for SEO and session consistency.
-    RewriteCond %{HTTP_HOST} ^www\.save-froms\.net$ [NC]
+    # Send every alternate host to the single canonical, non-www HTTPS URL.
+    RewriteCond %{HTTP_HOST} !^save-froms\.net$ [NC]
     RewriteRule ^ https://save-froms.net%{REQUEST_URI} [L,R=301]
 
     # Handle Authorization Header
