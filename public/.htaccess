@@ -5,6 +5,10 @@
 
     RewriteEngine On
 
+    # Keep one canonical production host for SEO and session consistency.
+    RewriteCond %{HTTP_HOST} ^www\.save-froms\.net$ [NC]
+    RewriteRule ^ https://save-froms.net%{REQUEST_URI} [L,R=301]
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
