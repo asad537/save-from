@@ -126,8 +126,17 @@ Route::get('/sitemap.xml', function () {
         $xml .= '<changefreq>'.($path === '/blog' ? 'daily' : 'weekly').'</changefreq><priority>'.($path === '/' ? '1.0' : '0.8').'</priority></url>';
     }
     $xml .= '</urlset>';
-    return response($xml)->header('Content-Type', 'application/xml');
-});
+    return response($xml, 200, [
+        'Content-Type' => 'application/xml; charset=UTF-8',
+        'Cache-Control' => 'public, max-age=3600',
+    ]);
+})->withoutMiddleware([
+    \App\Http\Middleware\EncryptCookies::class,
+    \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+    \Illuminate\Session\Middleware\StartSession::class,
+    \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+    \App\Http\Middleware\VerifyCsrfToken::class,
+]);
 
 Route::get('/{slug}', function (string $slug) {
     $site = SupportedSite::active()->where('slug', $slug)->first();
