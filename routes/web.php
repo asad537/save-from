@@ -27,7 +27,7 @@ Route::get('/', function () {
         'platforms' => SupportedSite::active()->orderBy('sort_order')->orderBy('name')->get()->map(function ($site) {
             return ['name' => $site->name, 'slug' => $site->slug, 'logo' => $site->logo_url, 'icon' => $site->brandIcon(), 'color' => $site->brandColor()];
         }),
-        'latestPosts' => BlogPost::published()->latest('published_at')->limit(3)->get(),
+        'latestPosts' => BlogPost::published()->latest('published_at')->latest('id')->limit(4)->get(),
     ]);
 })->name('home');
 
