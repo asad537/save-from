@@ -22,6 +22,12 @@ class BlogController extends Controller
 
         return view('blog-show', [
             'post' => $post,
+            'relatedPosts' => BlogPost::published()
+                ->where('id', '<>', $post->id)
+                ->latest('published_at')
+                ->latest('id')
+                ->limit(3)
+                ->get(),
             'title' => $post->meta_title ?: $post->title,
             'description' => $post->meta_description ?: ($post->excerpt ?: Str::limit(strip_tags($post->content), 160)),
             'ogImage' => $post->featured_image,
