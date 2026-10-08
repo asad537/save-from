@@ -35,15 +35,22 @@ class TrackVisit
                         $request->session()->put('analytics_visitor_key', $visitorKey);
                     }
 
-                    AnalyticsEvent::create([
-                        'event_type' => 'page_view',
-                        'visitor_key' => $visitorKey,
-                        'ip_address' => $request->ip(),
-                        'user_agent' => substr((string) $request->userAgent(), 0, 1000),
-                        'url' => substr((string) $request->fullUrl(), 0, 2048),
-                        'referrer' => substr((string) $request->headers->get('referer'), 0, 2048),
-                        'created_at' => now(),
-                    ]);
+                    $viewedToday = AnalyticsEvent::where('event_type', 'page_view')
+                        ->where('visitor_key', $visitorKey)
+                        ->whereDate('created_at', now()->toDateString())
+                        ->exists();
+
+                    if (!$viewedToday) {
+                        AnalyticsEvent::create([
+                            'event_type' => 'page_view',
+                            'visitor_key' => $visitorKey,
+                            'ip_address' => $request->ip(),
+                            'user_agent' => substr((string) $request->userAgent(), 0, 1000),
+                            'url' => substr((string) $request->fullUrl(), 0, 2048),
+                            'referrer' => substr((string) $request->headers->get('referer'), 0, 2048),
+                            'created_at' => now(),
+                        ]);
+                    }
 
                     $visitedToday = AnalyticsEvent::where('event_type', 'visit')
                         ->where('visitor_key', $visitorKey)

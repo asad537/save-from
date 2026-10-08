@@ -18,7 +18,7 @@ class VisitorTrackingTest extends TestCase
         $app['config']->set('database.connections.sqlite.database', ':memory:');
     }
 
-    public function test_multiple_pages_create_one_daily_visitor_and_multiple_page_views()
+    public function test_multiple_pages_create_one_daily_visitor_and_one_daily_page_view()
     {
         $visitorKey = hash('sha256', 'same-browser');
 
@@ -26,6 +26,6 @@ class VisitorTrackingTest extends TestCase
         $this->withSession(['analytics_visitor_key' => $visitorKey])->get('/blog')->assertOk();
 
         $this->assertSame(1, AnalyticsEvent::where('visitor_key', $visitorKey)->where('event_type', 'visit')->count());
-        $this->assertSame(2, AnalyticsEvent::where('visitor_key', $visitorKey)->where('event_type', 'page_view')->count());
+        $this->assertSame(1, AnalyticsEvent::where('visitor_key', $visitorKey)->where('event_type', 'page_view')->count());
     }
 }

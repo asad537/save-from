@@ -45,6 +45,9 @@ class AdminController extends Controller
     {
         $today = now()->startOfDay();
         $uniqueVisitorExpression = "COALESCE(NULLIF(visitor_key, ''), ip_address)";
+        $uniqueDailyPageViews = AnalyticsEvent::where('event_type', 'page_view')
+            ->selectRaw("DATE(created_at) as viewed_on, {$uniqueVisitorExpression} as visitor_identity")
+            ->groupBy(DB::raw('DATE(created_at)'), DB::raw($uniqueVisitorExpression));
         $dailyActivity = collect(range(6, 0))->map(function ($daysAgo) {
             $date = now()->subDays($daysAgo);
             return [
@@ -67,7 +70,7 @@ class AdminController extends Controller
             'siteCount' => SupportedSite::active()->count(),
             'totalVisitors' => AnalyticsEvent::where('event_type', 'visit')->selectRaw("COUNT(DISTINCT {$uniqueVisitorExpression}) as aggregate")->value('aggregate'),
             'todayVisitors' => AnalyticsEvent::where('event_type', 'visit')->where('created_at', '>=', $today)->selectRaw("COUNT(DISTINCT {$uniqueVisitorExpression}) as aggregate")->value('aggregate'),
-            'totalPageViews' => AnalyticsEvent::where('event_type', 'page_view')->count() + AnalyticsEvent::where('event_type', 'visit')->whereNull('visitor_key')->count(),
+            'totalPageViews' => DB::query()->fromSub($uniqueDailyPageViews, 'unique_daily_page_views')->count(),
             'totalDownloads' => AnalyticsEvent::where('event_type', 'download')->count(),
             'todayDownloads' => AnalyticsEvent::where('event_type', 'download')->where('created_at', '>=', $today)->count(),
             'recentDownloads' => AnalyticsEvent::where('event_type', 'download')->latest('created_at')->limit(15)->get(),

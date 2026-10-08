@@ -11,7 +11,7 @@
 <section class="metric-grid">
     <div class="metric-card" style="--metric:#2166f3;--metric-soft:#e9f2ff"><div class="metric-icon"><i class="bi bi-people-fill"></i></div><span class="metric-change">Today {{ $todayVisitors }}</span><strong>{{ number_format($totalVisitors) }}</strong><span>Unique browser visitors</span></div>
     <div class="metric-card" style="--metric:#714fe8;--metric-soft:#efebff"><div class="metric-icon"><i class="bi bi-download"></i></div><span class="metric-change">Today {{ $todayDownloads }}</span><strong>{{ number_format($totalDownloads) }}</strong><span>Total downloads</span></div>
-    <div class="metric-card" style="--metric:#11a866;--metric-soft:#e6f9f0"><div class="metric-icon"><i class="bi bi-eye-fill"></i></div><strong>{{ number_format($totalPageViews) }}</strong><span>Total page views</span></div>
+    <div class="metric-card" style="--metric:#11a866;--metric-soft:#e6f9f0"><div class="metric-icon"><i class="bi bi-eye-fill"></i></div><strong>{{ number_format($totalPageViews) }}</strong><span>Unique daily page visits</span></div>
     <div class="metric-card" style="--metric:#ef8b1d;--metric-soft:#fff2df"><div class="metric-icon"><i class="bi bi-globe2"></i></div><strong>{{ number_format($siteCount) }}</strong><span>Active supported sites</span></div>
 </section>
 
