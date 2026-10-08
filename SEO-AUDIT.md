@@ -54,3 +54,11 @@ Applied from the page-by-page audit; content lives in migration `2026_10_08_0000
 - Feature coverage in `tests/Feature/SeoPagesTest.php`.
 
 Still manual: verify indexing in Google Search Console, Core Web Vitals, and that the production mailboxes for the contact addresses exist.
+
+## Duplicate-content pass (2026-10-08)
+
+Method: fetched all 40 public URLs, stripped templates, compared 8-word shingles pairwise and listed sentences repeated across pages.
+
+- Before: platform pages shared up to 8.5% of body text (same legal sentences, "updated" line, generic FAQ and "expired" row on every page); every blog article showed the same three "related" posts, the same CTA heading and a long identical author box; Supported Sites cards copied each platform's meta description; all nine tool pages used the same paste-box text.
+- After (migration `2026_10_08_000004_remove_repeated_platform_boilerplate` + view changes): body-text overlap between any two pages is under 3%; no body sentence appears on more than one page; related posts are topical per article; CTA heading, hub-card blurbs and tool-box text are per page; the author box is one line.
+- The eight short platform link-guides (about 380 words each, published 2026-10-06) are not duplicates of each other, but they are thin. Expanding each with the platform's URL table and screenshots is the next content task.

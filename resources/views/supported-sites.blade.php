@@ -26,7 +26,7 @@
 @php($children = $site->childPages())
 <a class="site-item" href="{{ url('/'.$site->slug) }}">
     <span class="site-item-icon">@if($site->brandIcon())<i class="bi {{ $site->brandIcon() }}" style="font-size:30px;color:{{ $site->brandColor() }}"></i>@elseif($site->logo_url)<img src="{{ $site->logo_url }}" alt="{{ $site->name }} logo" title="{{ $site->name }} downloader">@else<i class="bi bi-globe2" style="font-size:28px;color:#2166f3"></i>@endif</span>
-    <span class="site-item-body"><h3>{{ $site->headlineText() }}</h3><p>{{ $site->meta_description ?: 'Download public '.$site->name.' media in the formats returned for your link.' }}</p>@if($children->isNotEmpty())<span class="site-item-tools">@foreach($children as $child)<span>{{ str_replace([' Downloader', 'YouTube ', 'Instagram ', 'TikTok '], ['', '', '', ''], $child->title) }}</span>@endforeach</span>@endif</span>
+    <span class="site-item-body"><h3>{{ $site->headlineText() }}</h3><p>{{ $site->hubBlurb() }}</p>@if($children->isNotEmpty())<span class="site-item-tools">@foreach($children as $child)<span>{{ str_replace([' Downloader', 'YouTube ', 'Instagram ', 'TikTok '], ['', '', '', ''], $child->title) }}</span>@endforeach</span>@endif</span>
     <i class="bi bi-arrow-right site-arrow"></i>
 </a>
 @endforeach

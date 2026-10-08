@@ -90,4 +90,12 @@ class SeoPagesTest extends TestCase
             ->assertSee('How long does a download link stay valid?')
             ->assertDontSee('How do I download a video with Save-Froms?');
     }
+
+    public function test_blog_index_uses_the_site_pagination_component()
+    {
+        $this->get('/blog')->assertOk()
+            ->assertSee('blog-pagination', false)
+            ->assertSee('Showing 1 to 12 of 16 guides')
+            ->assertDontSee('<svg', false);
+    }
 }

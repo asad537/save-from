@@ -25,16 +25,28 @@ class BlogController extends Controller
         return view('blog-show', [
             'post' => $post,
             'primaryPage' => $this->primaryPageFor($post),
-            'relatedPosts' => BlogPost::published()
-                ->where('id', '<>', $post->id)
-                ->latest('published_at')
-                ->latest('id')
-                ->limit(3)
-                ->get(),
+            'relatedPosts' => $this->relatedPostsFor($post),
             'title' => $post->meta_title ?: $post->title,
             'description' => $post->meta_description ?: ($post->excerpt ?: Str::limit(strip_tags($post->content), 160)),
             'ogImage' => $post->featured_image,
         ]);
+    }
+
+    /**
+     * Articles about the same platform or topic first, then the newest guides,
+     * so the related block differs from page to page.
+     */
+    private function relatedPostsFor(BlogPost $post)
+    {
+        $tokens = explode('-', $post->slug);
+        $topical = ['youtube', 'shorts', 'instagram', 'reels', 'stories', 'tiktok', 'facebook', 'twitter', 'x', 'vimeo', 'dailymotion', 'twitch', 'mp3', 'mp4', 'resolution', 'savefrom', 'mobile', 'android', 'iphone', 'privacy', 'links', 'link', 'url'];
+        $mine = array_values(array_intersect($tokens, $topical));
+
+        $candidates = BlogPost::published()->where('id', '<>', $post->id)->latest('published_at')->latest('id')->get();
+
+        return $candidates->sortByDesc(function ($candidate) use ($mine) {
+            return count(array_intersect(explode('-', $candidate->slug), $mine));
+        })->take(3)->values();
     }
 
     /**
@@ -68,7 +80,7 @@ class BlogController extends Controller
                 if ($has($pattern)) {
                     $page = LandingPage::active()->where('slug', $slug)->first();
                     if ($page) {
-                        return ['url' => url('/'.$page->slug), 'label' => 'Open the '.$page->title, 'text' => 'This guide pairs with the '.$page->title.' page, where you can paste a link and compare the formats available for your source.'];
+                        return ['url' => url('/'.$page->slug), 'label' => 'Open the '.$page->title, 'heading' => 'Put this guide to work on the '.$page->title, 'text' => 'This guide pairs with the '.$page->title.' page, where you can paste a link and compare the formats available for your source.'];
                     }
                 }
             }
@@ -79,12 +91,12 @@ class BlogController extends Controller
                 if (in_array($keyword, $tokens, true)) {
                     $site = SupportedSite::active()->where('slug', $slug)->first();
                     if ($site) {
-                        return ['url' => url('/'.$site->slug), 'label' => 'Open the '.$site->headlineText(), 'text' => 'Paste a public '.$site->name.' link on the '.$site->headlineText().' page and compare the formats returned for your source.'];
+                        return ['url' => url('/'.$site->slug), 'label' => 'Open the '.$site->headlineText(), 'heading' => 'Have a '.$site->name.' link ready?', 'text' => 'Paste a public '.$site->name.' link on the '.$site->headlineText().' page and compare the formats returned for your source.'];
                     }
                 }
             }
         }
 
-        return ['url' => route('home').'#downloader', 'label' => 'Open the downloader', 'text' => 'Return to the downloader and compare the formats available for your source.'];
+        return ['url' => route('home').'#downloader', 'label' => 'Open the downloader', 'heading' => 'Ready to check a public media link?', 'text' => 'Return to the downloader and compare the formats available for your source.'];
     }
 }

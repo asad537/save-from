@@ -55,6 +55,21 @@ class SupportedSite extends Model
     ];
 
     /**
+     * One-line description per platform for the supported-sites hub cards (distinct from each page's own meta description).
+     */
+    const HUB_BLURBS = [
+        'youtube-downloader' => 'Watch, youtu.be and Shorts links. Several MP4/WEBM resolutions plus MP3; higher qualities are assembled on demand.',
+        'instagram-downloader' => 'Public Reels and video posts. Parent page for the Reels and Stories tools; explains public vs private and expiring URLs.',
+        'tiktok-downloader' => 'Full and vm/vt short links. MP4 video and MP3 sound when returned; honest about watermark versions.',
+        'facebook-downloader' => 'Videos, Watch, Reels and fb.watch share links. SD and HD renditions; audience setting decides what works.',
+        'twitter-downloader' => 'x.com and legacy twitter.com status links. Multiple MP4 bitrates; GIFs arrive as short MP4 files.',
+        'vimeo-downloader' => 'Public and unlisted vimeo.com links. Explains every Vimeo privacy level and the creator download button.',
+        'dailymotion-downloader' => 'dailymotion.com/video and dai.ly links. SD to 1080p when uploaded; regional and age limits respected.',
+        'twitch-downloader' => 'clips.twitch.tv and channel clip links, plus public VODs before they expire. Live streams excluded.',
+        'pinterest-downloader' => 'Video Pins from pinterest.com/pin and pin.it links.',
+    ];
+
+    /**
      * What each platform integration can usually return. Used by the supported-sites hub.
      */
     const CAPABILITIES = [
@@ -108,6 +123,11 @@ class SupportedSite extends Model
     public function headlineText()
     {
         return str_replace(['[', ']'], '', $this->headline());
+    }
+
+    public function hubBlurb()
+    {
+        return self::HUB_BLURBS[$this->slug] ?? ($this->meta_description ?: 'Download public '.$this->name.' media in the formats returned for your link.');
     }
 
     public function capabilities()
