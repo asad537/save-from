@@ -13,6 +13,10 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
+    # The sitemap is generated from the published database records on every request.
+    # This rule intentionally runs before Apache can serve a stale sitemap.xml file.
+    RewriteRule ^sitemap\.xml$ index.php [L]
+
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
@@ -30,6 +34,7 @@
 
 <IfModule mod_headers.c>
     <Files "sitemap.xml">
-        Header set Cache-Control "public, max-age=3600"
+        Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+        Header set Pragma "no-cache"
     </Files>
 </IfModule>

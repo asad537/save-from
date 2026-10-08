@@ -175,7 +175,9 @@ Route::get('/robots.txt', function () {
 Route::get('/sitemap.xml', function () {
     return response(app(SitemapGenerator::class)->xml(), 200, [
         'Content-Type' => 'application/xml; charset=UTF-8',
-        'Cache-Control' => 'public, max-age=3600',
+        // Google must always receive the current published pages, not a cached XML file.
+        'Cache-Control' => 'no-store, no-cache, must-revalidate, max-age=0',
+        'Pragma' => 'no-cache',
     ]);
 })->withoutMiddleware([
     \App\Http\Middleware\EncryptCookies::class,
