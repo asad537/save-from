@@ -1,5 +1,5 @@
 @extends('layout')
-@php($title = 'Supported Video Download Sites – YouTube, Instagram, TikTok & More | Save-Froms')| Save-Froms')
+@php($title = 'Supported Video Download Sites – YouTube, Instagram, TikTok & More | Save-Froms')
 @php($description = 'See every platform Save-Froms supports, what each one can return (MP4, WEBM, MP3, Shorts or Reels), which link types work, and open the dedicated downloader for each site.')
 @section('content')
 <style>
