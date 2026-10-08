@@ -44,12 +44,13 @@ class AdminController extends Controller
     public function dashboard(Request $request)
     {
         $today = now()->startOfDay();
+        $uniqueVisitorExpression = "COALESCE(NULLIF(visitor_key, ''), ip_address)";
         $dailyActivity = collect(range(6, 0))->map(function ($daysAgo) {
             $date = now()->subDays($daysAgo);
             return [
                 'label' => $date->format('D'),
                 'date' => $date->format('Y-m-d'),
-                'visitors' => AnalyticsEvent::where('event_type', 'visit')->whereDate('created_at', $date->format('Y-m-d'))->distinct('ip_address')->count('ip_address'),
+                'visitors' => AnalyticsEvent::where('event_type', 'visit')->whereDate('created_at', $date->format('Y-m-d'))->selectRaw("COUNT(DISTINCT COALESCE(NULLIF(visitor_key, ''), ip_address)) as aggregate")->value('aggregate'),
                 'downloads' => AnalyticsEvent::where('event_type', 'download')->whereDate('created_at', $date->format('Y-m-d'))->count(),
             ];
         });
@@ -64,9 +65,9 @@ class AdminController extends Controller
             'postCount' => BlogPost::count(),
             'publishedCount' => BlogPost::published()->count(),
             'siteCount' => SupportedSite::active()->count(),
-            'totalVisitors' => AnalyticsEvent::where('event_type', 'visit')->distinct('ip_address')->count('ip_address'),
-            'todayVisitors' => AnalyticsEvent::where('event_type', 'visit')->where('created_at', '>=', $today)->distinct('ip_address')->count('ip_address'),
-            'totalPageViews' => AnalyticsEvent::where('event_type', 'visit')->count(),
+            'totalVisitors' => AnalyticsEvent::where('event_type', 'visit')->selectRaw("COUNT(DISTINCT {$uniqueVisitorExpression}) as aggregate")->value('aggregate'),
+            'todayVisitors' => AnalyticsEvent::where('event_type', 'visit')->where('created_at', '>=', $today)->selectRaw("COUNT(DISTINCT {$uniqueVisitorExpression}) as aggregate")->value('aggregate'),
+            'totalPageViews' => AnalyticsEvent::where('event_type', 'page_view')->count() + AnalyticsEvent::where('event_type', 'visit')->whereNull('visitor_key')->count(),
             'totalDownloads' => AnalyticsEvent::where('event_type', 'download')->count(),
             'todayDownloads' => AnalyticsEvent::where('event_type', 'download')->where('created_at', '>=', $today)->count(),
             'recentDownloads' => AnalyticsEvent::where('event_type', 'download')->latest('created_at')->limit(15)->get(),

@@ -10,7 +10,7 @@ class AnalyticsEvent extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'event_type', 'ip_address', 'user_agent', 'url', 'referrer',
+        'event_type', 'visitor_key', 'ip_address', 'user_agent', 'url', 'referrer',
         'platform', 'media_title', 'format', 'quality', 'created_at',
     ];
 
