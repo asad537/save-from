@@ -1,5 +1,5 @@
 @extends('layout')
-@php($title = 'Supported Video Download Sites | Save-Froms')
+@php($title = 'Supported Video Download Sites – YouTube, Instagram, TikTok & More | Save-Froms')| Save-Froms')
 @php($description = 'See every platform Save-Froms supports, what each one can return (MP4, WEBM, MP3, Shorts or Reels), which link types work, and open the dedicated downloader for each site.')
 @section('content')
 <style>
@@ -8,7 +8,7 @@
 @php($hubGuides = $guides->filter(function ($g) { return in_array($g->slug, \App\Models\LandingPage::HUB_SLUGS, true); }))
 @php($toolGuides = $guides->reject(function ($g) { return in_array($g->slug, \App\Models\LandingPage::HUB_SLUGS, true); }))
 <main>
-<section class="sites-hero"><div class="wrap"><div class="eyebrow"><i class="bi bi-globe2"></i>&nbsp; Supported Platforms</div><h1>Supported Video Download Sites</h1><p>Save-Froms works with public links from the {{ $platforms->count() }} platforms below. Each one has its own downloader page that explains which link types work, what formats come back and what the platform's privacy settings allow.</p></div></section>
+<section class="sites-hero"><div class="wrap"><div class="eyebrow"><i class="bi bi-globe2"></i>&nbsp; Supported Platforms</div><h1>Video Downloaders for Supported Sites</h1><p>Save-Froms works with public links from the {{ $platforms->count() }} platforms below. Each one has its own downloader page that explains which link types work, what formats come back and what the platform's privacy settings allow.</p></div></section>
 <section class="sites-section"><div class="wrap">
 <h2>What each platform can return</h2>
 <p class="lead">Formats are always source-dependent: Save-Froms lists what the media provider returns for the exact link you paste. This table shows what is <em>typically</em> available per platform and which URL patterns identify a single video.</p>

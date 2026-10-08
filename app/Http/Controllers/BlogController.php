@@ -18,6 +18,16 @@ class BlogController extends Controller
         ]);
     }
 
+    public function author()
+    {
+        return view('author', [
+            'posts' => BlogPost::published()->latest('published_at')->latest('id')->get(),
+            'platforms' => SupportedSite::active()->orderBy('sort_order')->get(),
+            'title' => 'Save-Froms Editorial Team – Author Profile',
+            'description' => 'Who writes and maintains the Save-Froms download guides, what they are responsible for, how guides are tested, and every published article.',
+        ]);
+    }
+
     public function show($slug)
     {
         $post = BlogPost::published()->where('slug', $slug)->firstOrFail();
@@ -80,7 +90,7 @@ class BlogController extends Controller
                 if ($has($pattern)) {
                     $page = LandingPage::active()->where('slug', $slug)->first();
                     if ($page) {
-                        return ['url' => url('/'.$page->slug), 'label' => 'Open the '.$page->title, 'heading' => 'Put this guide to work on the '.$page->title, 'text' => 'This guide pairs with the '.$page->title.' page, where you can paste a link and compare the formats available for your source.'];
+                        return ['url' => url('/'.$page->slug), 'label' => 'Open the '.$page->title, 'heading' => 'Put this guide to work on the '.$page->title, 'topic' => $page->title, 'text' => 'This guide pairs with the '.$page->title.' page, where you can paste a link and compare the formats available for your source.'];
                     }
                 }
             }
@@ -91,12 +101,12 @@ class BlogController extends Controller
                 if (in_array($keyword, $tokens, true)) {
                     $site = SupportedSite::active()->where('slug', $slug)->first();
                     if ($site) {
-                        return ['url' => url('/'.$site->slug), 'label' => 'Open the '.$site->headlineText(), 'heading' => 'Have a '.$site->name.' link ready?', 'text' => 'Paste a public '.$site->name.' link on the '.$site->headlineText().' page and compare the formats returned for your source.'];
+                        return ['url' => url('/'.$site->slug), 'label' => 'Open the '.$site->headlineText(), 'heading' => 'Have a '.$site->name.' link ready?', 'topic' => $site->name, 'text' => 'Paste a public '.$site->name.' link on the '.$site->headlineText().' page and compare the formats returned for your source.'];
                     }
                 }
             }
         }
 
-        return ['url' => route('home').'#downloader', 'label' => 'Open the downloader', 'heading' => 'Ready to check a public media link?', 'text' => 'Return to the downloader and compare the formats available for your source.'];
+        return ['url' => route('home').'#downloader', 'label' => 'Open the downloader', 'heading' => 'Ready to check a public media link?', 'topic' => 'Guides', 'text' => 'Return to the downloader and compare the formats available for your source.'];
     }
 }

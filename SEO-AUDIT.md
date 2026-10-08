@@ -62,3 +62,20 @@ Method: fetched all 40 public URLs, stripped templates, compared 8-word shingles
 - Before: platform pages shared up to 8.5% of body text (same legal sentences, "updated" line, generic FAQ and "expired" row on every page); every blog article showed the same three "related" posts, the same CTA heading and a long identical author box; Supported Sites cards copied each platform's meta description; all nine tool pages used the same paste-box text.
 - After (migration `2026_10_08_000004_remove_repeated_platform_boilerplate` + view changes): body-text overlap between any two pages is under 3%; no body sentence appears on more than one page; related posts are topical per article; CTA heading, hub-card blurbs and tool-box text are per page; the author box is one line.
 - The eight short platform link-guides (about 380 words each, published 2026-10-06) are not duplicates of each other, but they are thin. Expanding each with the platform's URL table and screenshots is the next content task.
+
+## Second live audit follow-up (2026-10-08)
+
+Verified live: robots.txt and sitemap.xml return 200 (41 URLs), www and http redirect 301 to https non-www, trailing slashes redirect, Privacy/Terms return 200 with self canonicals, all 40 meta descriptions are unique.
+
+Applied (migration `2026_10_08_000005_expand_thin_pages_and_titles` + views):
+- YouTube Shorts and YouTube to MP4 pages expanded with intent-specific sections (Shorts URL anatomy, Shorts vs regular, Android/iPhone steps, failure causes, quality guide; MP4 vs WEBM table, resolutions available as MP4, video-only 1080p, compatibility, Android/iPhone).
+- YouTube MP3 page H1/title is now the exact-match "YouTube to MP3 Downloader".
+- Facebook and Dailymotion pages gained Android/iPhone and quality/file-size sections.
+- Titles aligned: Instagram, Twitter/X, Vimeo, Twitch. Supported Sites title/H1 updated.
+- Three FAQ entries added (safety, 1080p/4K, stuck/403) that link out instead of duplicating.
+- Author profile page at `/authors/save-froms-editorial-team` (ProfilePage schema), linked from every article byline and author box, included in the sitemap.
+- Visible breadcrumbs plus hierarchical BreadcrumbList on tool pages (Home > Supported Sites > Platform > Tool); blog breadcrumbs show the topic.
+- WebApplication schema on the homepage.
+- Optional operator identity block on About, driven by `OPERATOR_NAME` / `OPERATOR_LOCATION` in `.env` (left blank until real details are supplied).
+
+Not done on purpose: first-person "we tested on Chrome 154" claims (only add if true), more SaveFrom-branded articles (2 of 16 is enough), and per-resolution doorway pages.

@@ -19,6 +19,7 @@ class SitemapGenerator
             ['url' => url('/contact'), 'lastmod' => null, 'changefreq' => 'weekly', 'priority' => '0.8'],
             ['url' => url('/privacy-policy'), 'lastmod' => null, 'changefreq' => 'weekly', 'priority' => '0.8'],
             ['url' => url('/terms-of-service'), 'lastmod' => null, 'changefreq' => 'weekly', 'priority' => '0.8'],
+            ['url' => route('author'), 'lastmod' => null, 'changefreq' => 'weekly', 'priority' => '0.5'],
         ]);
 
         SupportedSite::active()->get(['slug', 'updated_at'])->each(function ($site) use ($entries) {

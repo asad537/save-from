@@ -76,3 +76,6 @@
 @media(max-width:620px){.home-post-card,.home-post-card.is-featured{display:grid;grid-template-columns:112px minmax(0,1fr);min-height:166px}.home-post-card .home-post-media,.home-post-card.is-featured .home-post-media{min-height:166px;border-right:1px solid #e4edf8}.home-post-card .home-post-body,.home-post-card.is-featured .home-post-body{padding:16px}.home-post-card h3,.home-post-card.is-featured h3{font-size:16px}.home-post-card p,.home-post-card.is-featured p{display:none}}
 </style>
 @endsection
+@push('head')
+<script type="application/ld+json">{!! json_encode(['@context' => 'https://schema.org', '@type' => 'WebApplication', 'name' => 'Save-Froms Online Video Downloader', 'url' => route('home'), 'applicationCategory' => 'MultimediaApplication', 'operatingSystem' => 'Any (web browser)', 'browserRequirements' => 'Requires a modern web browser', 'offers' => ['@type' => 'Offer', 'price' => '0', 'priceCurrency' => 'USD'], 'featureList' => 'Paste a public video link, compare available MP4, WEBM and MP3 formats, download without an account', 'publisher' => ['@id' => url('/').'#organization']], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}</script>
+@endpush

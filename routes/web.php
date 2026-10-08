@@ -150,6 +150,7 @@ Route::get('/prepare-download/{token}', function (Request $request, string $toke
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
+Route::get('/authors/save-froms-editorial-team', [BlogController::class, 'author'])->name('author');
 Route::get('/faq', function () {
     return view('faq', ['faqs' => Faq::active()->orderBy('sort_order')->orderBy('id')->get()]);
 })->name('faq');

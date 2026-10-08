@@ -58,6 +58,10 @@ return [
     'support_email' => env('SUPPORT_EMAIL', 'support@save-froms.net'),
     'legal_email' => env('LEGAL_EMAIL', 'legal@save-froms.net'),
 
+    // Optional operator identity for the About page. Leave empty rather than inventing values.
+    'operator_name' => env('OPERATOR_NAME'),
+    'operator_location' => env('OPERATOR_LOCATION'),
+
     'asset_url' => env('ASSET_URL', null),
 
     /*

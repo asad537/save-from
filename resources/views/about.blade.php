@@ -6,7 +6,8 @@
 <main>
 <section class="static-hero"><div class="wrap"><div class="eyebrow"><i class="bi bi-info-circle"></i>&nbsp; About</div><h1>About Save-Froms</h1><p>Save-Froms is a small, independent web tool that lets you paste a public video link and see which formats you can actually save. This page explains what the service is, what it refuses to do, and how the content on this site is produced.</p><div class="static-meta"><span><i class="bi bi-calendar3"></i> Online since 2026</span><span><i class="bi bi-globe2"></i> {{ \App\Models\SupportedSite::active()->count() }} supported platforms</span><span><i class="bi bi-journal-text"></i> {{ \App\Models\BlogPost::published()->count() }} published guides</span></div></div></section>
 <section class="static-stage"><div class="wrap static-layout">
-<aside class="static-toc"><strong><i class="bi bi-list-nested"></i> On this page</strong><a href="#what">What Save-Froms does</a><a href="#not">What it does not do</a><a href="#how">How it works</a><a href="#editorial">Editorial principles</a><a href="#privacy">Privacy principles</a><a href="#independent">Independence</a><a href="#contact">Contact</a></aside>
+<aside class="static-toc"><strong><i class="bi bi-list-nested"></i> On this page</strong><a href="#what">What Save-Froms does</a><a href="#not">What it does not do</a><a href="#how">How it works</a><a href="#editorial">Editorial principles</a><a href="#privacy">Privacy principles</a>@if(config('app.operator_name'))<a href="#operator">Operator</a>@endif
+<a href="#independent">Independence</a><a href="#contact">Contact</a></aside>
 <div class="static-card"><div class="static-content">
 <h2 id="what">What Save-Froms does</h2>
 <p>Save-Froms is a browser-based <strong>public video downloader</strong>. You paste one complete link from a supported platform, such as YouTube, Instagram, TikTok, Facebook, X, Vimeo, Dailymotion or Twitch, and the service asks its media provider which video and audio resources exist for that exact source. It then lists them with format, quality and estimated size so you can choose the file that fits your device, and streams the chosen file to your browser.</p>
@@ -44,6 +45,8 @@
 <h2 id="privacy">Privacy principles</h2>
 <p>We keep the minimum needed to run and protect the service: basic request logs, an anonymous visitor cookie that counts one visit per browser per day, and a record of which platform, format and quality completed downloads used. We do not sell data, do not run advertising networks on the site today, and do not keep the media you download. The full <a href="{{ url('/privacy-policy') }}">Privacy Policy</a> lists every data point and how long it is kept.</p>
 
+@if(config('app.operator_name'))<h2 id="operator">Who operates Save-Froms</h2><table><tbody><tr><th>Operated by</th><td>{{ config('app.operator_name') }}</td></tr>@if(config('app.operator_location'))<tr><th>Location</th><td>{{ config('app.operator_location') }}</td></tr>@endif
+<tr><th>Contact</th><td><a href="mailto:{{ config('app.support_email') }}">{{ config('app.support_email') }}</a></td></tr></tbody></table>@endif
 <h2 id="independent">Independence and naming</h2>
 <p>Save-Froms (save-froms.net) is an independent service. It is <strong>not</strong> affiliated with, endorsed by or operated by SaveFrom.net, and it is not affiliated with YouTube, Meta, TikTok, X, Vimeo, Dailymotion, Twitch or any other platform mentioned on this site. Platform names are used only to describe which links the tool supports. Our media processing is provided by a third-party API partner; Save-Froms does not scrape platforms itself.</p>
 
