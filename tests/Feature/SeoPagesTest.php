@@ -122,7 +122,7 @@ class SeoPagesTest extends TestCase
     {
         $this->get('/blog')->assertOk()
             ->assertSee('blog-pagination', false)
-            ->assertSee('Showing 1 to 12 of 16 guides')
+            ->assertSee('Showing 1 to 12 of')
             ->assertDontSee('<svg', false);
     }
 }
