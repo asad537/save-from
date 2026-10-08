@@ -38,3 +38,19 @@ Audit date: 2026-10-06
 - Monitor Core Web Vitals, indexing, crawl errors and provider uptime after real traffic begins.
 
 Ranking is not guaranteed; relevance, competition, backlinks, real user satisfaction, site reliability and search-engine systems remain external factors.
+
+## Audit follow-up (2026-10-08)
+
+Applied from the page-by-page audit; content lives in migration `2026_10_08_000003_apply_seo_audit_content_fixes`.
+
+- Contact, About, Privacy Policy and Terms of Service are real pages (`resources/views/{contact,about,privacy,terms}.blade.php`). `/privacy`, `/terms`, `/about-us`, `/contact-us` redirect (301) to the canonical URLs. Addresses come from `SUPPORT_EMAIL` and `LEGAL_EMAIL` in `.env`.
+- Header "Download Extension" CTA replaced with a real "Download Video" link to the homepage downloader.
+- Homepage: H1 "Free Online Video Downloader", honest platform claim (no "100+ websites"), demo visual labelled "Example result", fake "Premium" badge removed, title/meta target "online video downloader".
+- Platform pages: keyword H1 per platform (`supported_sites.heading`, editable in admin), audit title strategy, breadcrumb + BreadcrumbList schema, platform-specific content (URL pattern tables, platform troubleshooting tables, platform-only FAQs), and an automatic "tools, guides and help" section linking child tools, matching blog posts and the help hubs.
+- Specialist landing pages link up to their parent platform and across to sibling tools (`LandingPage::parentPlatform()` / `siblingPages()`).
+- Supported Sites is a hub: capability table per platform, link types, grouped tools, help hubs.
+- Global FAQ rewritten to site-level questions only; platform questions stay on platform pages.
+- Blog: each article's CTA targets its most specific action page; overlapping articles re-angled (MP4 vs MP3 generic guide, TikTok MP4 vs MP3, mobile guide, YouTube URL types guide); author box links to editorial principles.
+- Feature coverage in `tests/Feature/SeoPagesTest.php`.
+
+Still manual: verify indexing in Google Search Console, Core Web Vitals, and that the production mailboxes for the contact addresses exist.

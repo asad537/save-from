@@ -54,6 +54,10 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    // Public contact addresses shown on the Contact, Privacy and Terms pages.
+    'support_email' => env('SUPPORT_EMAIL', 'support@save-froms.net'),
+    'legal_email' => env('LEGAL_EMAIL', 'legal@save-froms.net'),
+
     'asset_url' => env('ASSET_URL', null),
 
     /*

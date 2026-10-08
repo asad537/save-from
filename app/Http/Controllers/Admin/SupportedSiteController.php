@@ -62,6 +62,7 @@ class SupportedSiteController extends Controller
             'domains' => ['required', 'string', 'max:1000'],
             'logo_url' => ['nullable', 'url', 'max:2048'],
             'description' => ['nullable', 'string', 'max:20000'],
+            'heading' => ['nullable', 'string', 'max:120'],
             'meta_title' => ['nullable', 'string', 'max:70'],
             'meta_description' => ['nullable', 'string', 'max:180'],
             'is_active' => ['boolean'],

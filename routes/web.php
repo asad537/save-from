@@ -159,13 +159,15 @@ Route::get('/supported-sites', function () {
         'guides' => LandingPage::active()->orderBy('sort_order')->orderBy('title')->get(),
     ]);
 })->name('supported-sites');
-Route::get('/about', fn () => view('static-page', ['title' => 'About Save-Froms']))->name('about');
-Route::get('/contact', fn () => view('static-page', ['title' => 'Contact Us']))->name('contact');
-Route::get('/privacy-policy', fn () => view('static-page', [
-    'title' => 'Privacy Policy',
-    'content' => '<h2>Analytics and download activity</h2><p>Save-Froms records limited technical information such as IP address, browser user agent, visited page, referrer, download platform, format, quality, and event time. This information is used for website analytics, security, abuse prevention, and service improvement.</p><p>Analytics records are available only inside the protected administrator area. Save-Froms does not store the downloaded media file itself. You should only download public content that you own or have permission to use.</p>',
-]))->name('privacy');
-Route::get('/terms-of-service', fn () => view('static-page', ['title' => 'Terms of Service']))->name('terms');
+Route::get('/about', fn () => view('about'))->name('about');
+Route::get('/contact', fn () => view('contact'))->name('contact');
+Route::get('/privacy-policy', fn () => view('privacy'))->name('privacy');
+Route::get('/terms-of-service', fn () => view('terms'))->name('terms');
+// Short aliases people type by hand; keep one canonical URL per legal page.
+Route::redirect('/privacy', '/privacy-policy', 301);
+Route::redirect('/terms', '/terms-of-service', 301);
+Route::redirect('/about-us', '/about', 301);
+Route::redirect('/contact-us', '/contact', 301);
 
 Route::get('/robots.txt', function () {
     return response("User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /download-processing/\nSitemap: ".url('/sitemap.xml'), 200)
@@ -201,6 +203,7 @@ Route::get('/{slug}', function (string $slug) {
     $page = LandingPage::active()->where('slug', $slug)->firstOrFail();
     return view('landing-page', [
         'page' => $page,
-        'relatedPages' => LandingPage::active()->where('id', '<>', $page->id)->orderBy('sort_order')->limit(6)->get(),
+        // Site-wide help hubs; the platform parent and sibling tools are resolved by the view.
+        'relatedPages' => LandingPage::active()->where('id', '<>', $page->id)->whereIn('slug', LandingPage::HUB_SLUGS)->orderBy('sort_order')->get(),
     ]);
 })->where('slug', '[a-z0-9-]+');

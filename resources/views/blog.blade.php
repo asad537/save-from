@@ -22,7 +22,10 @@
                 @foreach($posts as $post)
                     @php
                         $readingMinutes = max(3, (int) ceil(str_word_count(strip_tags($post->content)) / 220));
-                        $topic = Str::contains(Str::lower($post->title), 'instagram') ? 'Instagram' : (Str::contains(Str::lower($post->title), 'tiktok') ? 'TikTok' : (Str::contains(Str::lower($post->title), 'youtube') ? 'YouTube' : 'Media guide'));
+                        $topic = 'Media guide';
+                        foreach (['youtube' => 'YouTube', 'instagram' => 'Instagram', 'tiktok' => 'TikTok', 'facebook' => 'Facebook', 'twitter' => 'X (Twitter)', 'x' => 'X (Twitter)', 'vimeo' => 'Vimeo', 'dailymotion' => 'Dailymotion', 'twitch' => 'Twitch', 'savefrom' => 'SaveFrom help', 'resolution' => 'Formats & quality', 'mp4' => 'Formats & quality'] as $token => $label) {
+                            if (in_array($token, explode('-', $post->slug), true)) { $topic = $label; break; }
+                        }
                     @endphp
                     <article class="post-card">
                         <a class="post-media" href="{{ route('blog.show', $post->slug) }}" aria-label="Read {{ $post->title }}">
