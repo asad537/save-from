@@ -30,6 +30,13 @@ class BlogController extends Controller
 
     public function show($slug)
     {
+        $legacySlugs = [
+            'download-video-yt-mobile-india-guide' => 'download-video-yt-mobile-guide',
+        ];
+        if (isset($legacySlugs[$slug])) {
+            return redirect()->route('blog.show', $legacySlugs[$slug], 301);
+        }
+
         $post = BlogPost::published()->where('slug', $slug)->firstOrFail();
 
         return view('blog-show', [
