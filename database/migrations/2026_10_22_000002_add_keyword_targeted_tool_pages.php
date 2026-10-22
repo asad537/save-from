@@ -10,6 +10,7 @@ class AddKeywordTargetedToolPages extends Migration
         $now = now();
 
         foreach ($this->pages() as $page) {
+            $page['faq_items'] = json_encode($page['faq_items'], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
             DB::table('landing_pages')->updateOrInsert(
                 ['slug' => $page['slug']],
                 $page + ['created_at' => $now, 'updated_at' => $now]
