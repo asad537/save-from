@@ -34,9 +34,11 @@ class SupportedSite extends Model
      * Specialist landing pages that belong under each platform hub.
      */
     const CHILD_PAGES = [
-        'youtube-downloader' => ['youtube-shorts-downloader', 'youtube-to-mp4', 'youtube-mp3-downloader'],
+        'youtube-downloader' => ['youtube-link-downloader', 'youtube-shorts-downloader', 'youtube-to-mp4', 'youtube-mp3-downloader'],
         'instagram-downloader' => ['instagram-reels-downloader', 'instagram-stories-downloader'],
         'tiktok-downloader' => ['tiktok-mp4-downloader', 'tiktok-mp3-downloader'],
+        'vimeo-downloader' => ['download-vimeo-videos'],
+        'dailymotion-downloader' => ['dailymotion-to-mp4'],
     ];
 
     /**
