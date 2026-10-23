@@ -37,6 +37,7 @@ class SupportedSite extends Model
         'youtube-downloader' => ['youtube-link-downloader', 'youtube-shorts-downloader', 'youtube-to-mp4', 'youtube-mp3-downloader'],
         'instagram-downloader' => ['instagram-reels-downloader', 'instagram-stories-downloader'],
         'tiktok-downloader' => ['tiktok-mp4-downloader', 'tiktok-mp3-downloader'],
+        'facebook-downloader' => ['facebook-reels-downloader'],
         'vimeo-downloader' => ['download-vimeo-videos'],
         'dailymotion-downloader' => ['dailymotion-to-mp4'],
     ];
