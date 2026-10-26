@@ -39,13 +39,14 @@ class BlogController extends Controller
 
         $post = BlogPost::published()->where('slug', $slug)->firstOrFail();
 
-        return view('blog-show', [
+        return view($post->language === 'ar' ? 'blog-show-ar' : 'blog-show', [
             'post' => $post,
             'primaryPage' => $this->primaryPageFor($post),
             'relatedPosts' => $this->relatedPostsFor($post),
             'title' => $post->meta_title ?: $post->title,
             'description' => $post->meta_description ?: ($post->excerpt ?: Str::limit(strip_tags($post->content), 160)),
             'ogImage' => $post->featured_image,
+            'language' => $post->language ?: 'en',
         ]);
     }
 
@@ -59,7 +60,7 @@ class BlogController extends Controller
         $topical = ['youtube', 'shorts', 'instagram', 'reels', 'stories', 'tiktok', 'facebook', 'twitter', 'x', 'vimeo', 'dailymotion', 'twitch', 'mp3', 'mp4', 'resolution', 'savefrom', 'mobile', 'android', 'iphone', 'privacy', 'links', 'link', 'url'];
         $mine = array_values(array_intersect($tokens, $topical));
 
-        $candidates = BlogPost::published()->where('id', '<>', $post->id)->latest('published_at')->latest('id')->get();
+        $candidates = BlogPost::published()->where('id', '<>', $post->id)->where('language', $post->language ?: 'en')->latest('published_at')->latest('id')->get();
 
         return $candidates->sortByDesc(function ($candidate) use ($mine) {
             return count(array_intersect(explode('-', $candidate->slug), $mine));

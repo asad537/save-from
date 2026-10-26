@@ -13,6 +13,7 @@
 @media(max-width:940px){.blog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.post-card:first-child{grid-column:auto}.post-card:first-child .post-body{padding:18px}.post-card:first-child h2{font-size:18px}}
 @media(max-width:650px){.blog-hero{padding:48px 0 50px}.blog-hero h1{font-size:38px;line-height:1.1;letter-spacing:-1px}.blog-hero .sub{font-size:15px}.blog-list{padding:38px 0 58px}.blog-grid{grid-template-columns:1fr;gap:16px}.post-card,.post-card:first-child{grid-column:auto;display:grid;grid-template-columns:118px minmax(0,1fr);border-radius:16px}.post-card .post-media,.post-card:first-child .post-media{height:100%;min-height:178px;aspect-ratio:auto}.post-card .post-body,.post-card:first-child .post-body{justify-content:flex-start;padding:16px}.post-card h2,.post-card:first-child h2{margin:7px 0 9px;font-size:17px;line-height:1.32;-webkit-line-clamp:3}.post-card p,.post-card:first-child p{display:none}.post-meta{gap:6px;font-size:8px}.post-meta span,.post-meta .read-time{display:none}.post-topic{left:8px;top:8px;padding:4px 7px;font-size:7px}.read-more{padding-top:11px;font-size:10px}.blog-pagination{align-items:flex-start;flex-direction:column;padding:13px}.pagination-links{width:100%;justify-content:flex-end}.pagination-link{min-width:32px;height:32px}.pagination-link.page-number:not(.is-active){display:none}}
 @media(max-width:390px){.post-card,.post-card:first-child{grid-template-columns:104px minmax(0,1fr)}.post-card .post-body,.post-card:first-child .post-body{padding:14px}.post-card h2,.post-card:first-child h2{font-size:16px}}
+.post-card[dir="rtl"] h2{text-align:right}.post-card[dir="rtl"] .post-body{font-family:'Noto Sans Arabic',sans-serif}.post-card[dir="rtl"] .post-meta{text-transform:none}
 </style>
 <main>
     <section class="blog-hero"><div class="wrap"><div class="eyebrow"><i class="bi bi-journal-richtext"></i>&nbsp; Save-Froms Journal</div><h1>Guides for Smarter Downloads</h1><p class="sub">Practical, easy-to-follow media guides for public links, formats, quality and mobile workflows.</p></div></section>
@@ -27,7 +28,7 @@
                             if (in_array($token, explode('-', $post->slug), true)) { $topic = $label; break; }
                         }
                     @endphp
-                    <article class="post-card">
+                    <article class="post-card" lang="{{ $post->language ?: 'en' }}" dir="{{ $post->language === 'ar' ? 'rtl' : 'ltr' }}">
                         <a class="post-media" href="{{ route('blog.show', $post->slug) }}" aria-label="Read {{ $post->title }}">
                             @if($post->featured_image)
                                 <img class="post-image" src="{{ Str::startsWith($post->featured_image, ['http://','https://']) ? $post->featured_image : asset($post->featured_image) }}" alt="Illustration for {{ $post->title }}" title="{{ $post->title }}" width="1280" height="720" loading="lazy" decoding="async">
@@ -37,10 +38,10 @@
                             <span class="post-topic">{{ $topic }}</span>
                         </a>
                         <div class="post-body">
-                            <div class="post-meta"><time datetime="{{ optional($post->published_at)->toDateString() }}">{{ optional($post->published_at)->format('M d, Y') ?: $post->created_at->format('M d, Y') }}</time><span></span><small class="read-time">{{ $readingMinutes }} min read</small></div>
+                            <div class="post-meta"><time datetime="{{ optional($post->published_at)->toDateString() }}">{{ optional($post->published_at)->format('M d, Y') ?: $post->created_at->format('M d, Y') }}</time>@if($post->language !== 'ar')<span></span><small class="read-time">{{ $readingMinutes }} min read</small>@endif</div>
                             <h2><a href="{{ route('blog.show', $post->slug) }}">{{ $post->title }}</a></h2>
                             <p>{{ $post->excerpt ?: Str::limit(strip_tags($post->content), 135) }}</p>
-                            <a class="read-more" href="{{ route('blog.show', $post->slug) }}"><span>Read full guide</span><i class="bi bi-arrow-right"></i></a>
+                            <a class="read-more" href="{{ route('blog.show', $post->slug) }}"><span>{{ $post->language === 'ar' ? 'اقرأ الدليل' : 'Read full guide' }}</span><i class="bi bi-arrow-right"></i></a>
                         </div>
                     </article>
                 @endforeach

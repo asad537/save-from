@@ -70,6 +70,7 @@ class BlogPostController extends Controller
             'featured_image_file' => ['nullable', 'image', 'max:3072'],
             'meta_title' => ['nullable', 'string', 'max:70'],
             'meta_description' => ['nullable', 'string', 'max:180'],
+            'language' => ['required', Rule::in(['en', 'ar'])],
             'status' => ['required', Rule::in(['draft', 'published'])],
             'published_at' => ['nullable', 'date'],
         ]);

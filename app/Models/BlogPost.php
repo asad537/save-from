@@ -9,7 +9,7 @@ class BlogPost extends Model
 {
     protected $fillable = [
         'title', 'slug', 'excerpt', 'content', 'featured_image',
-        'meta_title', 'meta_description', 'status', 'published_at',
+        'meta_title', 'meta_description', 'language', 'status', 'published_at',
     ];
 
     protected $dates = ['published_at'];
