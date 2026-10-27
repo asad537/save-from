@@ -1,6 +1,6 @@
 @extends('layout')
 @php($title = 'Privacy Policy | Save-Froms')
-@php($description = 'How Save-Froms handles submitted links, request logs, cookies, analytics, temporary download links and third-party providers, how long data is kept and how to contact us.')
+@php($description = 'How Save-Froms handles submitted links, logs, cookies, analytics, temporary download links and third-party providers, and how long data is kept.')
 @php($supportEmail = config('app.support_email'))
 @php($legalEmail = config('app.legal_email'))
 @section('content')

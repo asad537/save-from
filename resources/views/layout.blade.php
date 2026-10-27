@@ -5,7 +5,7 @@
     <title>{{ $title ?? 'Save-Froms — Download Public Media Fast' }}</title>
     <meta name="description" content="{{ $description ?? 'Save-Froms is a fast, simple and mobile-friendly public media downloader for video and audio links.' }}">
     <meta name="robots" content="{{ $robots ?? 'index,follow' }}">
-    <link rel="canonical" href="{{ url()->current() }}">
+    <link rel="canonical" href="{{ $canonical ?? url()->current() }}">
     @php($socialImage = !empty($ogImage) ? (Str::startsWith($ogImage, ['http://','https://']) ? $ogImage : asset($ogImage)) : asset('images/hero-landscape.png'))
     <meta property="og:title" content="{{ $title ?? 'Save-Froms' }}"><meta property="og:description" content="{{ $description ?? 'Download public media fast with Save-Froms.' }}"><meta property="og:type" content="{{ isset($post) ? 'article' : 'website' }}"><meta property="og:url" content="{{ url()->current() }}"><meta property="og:site_name" content="Save-Froms"><meta property="og:locale" content="{{ ['en' => 'en_US', 'ar' => 'ar_AR', 'pt' => 'pt_BR', 'ur' => 'ur_PK', 'hi' => 'hi_IN'][$language ?? 'en'] ?? 'en_US' }}"><meta property="og:image" content="{{ $socialImage }}"><meta property="og:image:alt" content="{{ $title ?? 'Save-Froms media downloader' }}">
     <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{{ $title ?? 'Save-Froms' }}"><meta name="twitter:description" content="{{ $description ?? 'Download public media fast with Save-Froms.' }}"><meta name="twitter:image" content="{{ $socialImage }}">

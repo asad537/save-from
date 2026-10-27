@@ -22,6 +22,10 @@ class SitemapGenerator
             ['url' => route('author'), 'lastmod' => null, 'changefreq' => 'weekly', 'priority' => '0.5'],
         ]);
 
+        foreach (array_keys(\App\Support\GuideTopics::all()) as $topic) {
+            $entries->push(['url' => route('guides.topic', $topic), 'lastmod' => null, 'changefreq' => 'weekly', 'priority' => '0.7']);
+        }
+
         SupportedSite::active()->get(['slug', 'updated_at'])->each(function ($site) use ($entries) {
             $entries->push($this->entry(url('/'.$site->slug), $site->updated_at));
         });

@@ -150,7 +150,9 @@ Route::get('/prepare-download/{token}', function (Request $request, string $toke
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
-Route::get('/authors/save-froms-editorial-team', [BlogController::class, 'author'])->name('author');
+Route::get('/guides/{topic}', [BlogController::class, 'topic'])->where('topic', '[a-z-]+')->name('guides.topic');
+Route::get('/authors/alex-roy', [BlogController::class, 'author'])->name('author');
+Route::redirect('/authors/save-froms-editorial-team', '/authors/alex-roy', 301);
 Route::get('/faq', function () {
     return view('faq', ['faqs' => Faq::active()->orderBy('sort_order')->orderBy('id')->get()]);
 })->name('faq');
@@ -175,7 +177,7 @@ Route::redirect('/dailymotion-to-mp4', '/dailymotion-downloader', 301);
 Route::redirect('/youtube-link-downloader', '/youtube-downloader', 301);
 
 Route::get('/robots.txt', function () {
-    return response("User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /download-processing/\nSitemap: ".url('/sitemap.xml'), 200)
+    return response("User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /analyze\nDisallow: /prepare-download/\nDisallow: /download-file/\nSitemap: ".url('/sitemap.xml'), 200)
         ->header('Content-Type', 'text/plain');
 });
 

@@ -1,6 +1,6 @@
 @extends('layout')
 @php($title = 'Terms of Service | Save-Froms')
-@php($description = 'The rules for using the Save-Froms public video downloader: acceptable use, copyright responsibility, prohibited uses, availability, temporary links, liability and contact.')
+@php($description = 'Rules for using the Save-Froms public video downloader: acceptable use, copyright responsibility, prohibited uses, availability, temporary links and liability.')
 @php($legalEmail = config('app.legal_email'))
 @section('content')
 @include('partials.static-page-style')

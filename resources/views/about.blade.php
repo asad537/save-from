@@ -32,7 +32,7 @@
 <p>The step-by-step user view is in the <a href="{{ url('/how-to-download-videos') }}">how-to guide</a>, and every error message is explained in the <a href="{{ url('/download-troubleshooting') }}">troubleshooting guide</a>.</p>
 
 <h2 id="editorial">Editorial principles</h2>
-<p>Everything in the <a href="{{ route('blog') }}">blog</a>, the platform pages and the FAQ is written by the Save-Froms Editorial Team, the same small group that builds and supports the downloader. We follow five rules:</p>
+<p>Everything in the <a href="{{ route('blog') }}">blog</a>, the platform pages and the FAQ is written by <a href="{{ route('author') }}">Alex Roy</a>, the editor who also builds and supports the downloader. We follow five rules:</p>
 <div class="principles">
 <div><strong>Tested against the live tool</strong><span>Every link pattern and format claim is checked with the real downloader before it is published, and re-checked when a platform changes its URLs or delivery.</span></div>
 <div><strong>Honest about limits</strong><span>We say when something cannot be downloaded, when a quality is often missing and when a short link may expire. We do not promise watermark removal or resolutions the source does not have.</span></div>

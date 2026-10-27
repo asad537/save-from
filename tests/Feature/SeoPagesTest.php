@@ -86,8 +86,9 @@ class SeoPagesTest extends TestCase
 
     public function test_author_page_lists_articles_and_is_linked_from_posts()
     {
-        $this->get('/authors/save-froms-editorial-team')->assertOk()
-            ->assertSee('<h1 style="margin:10px 0 0">Save-Froms Editorial Team</h1>', false)
+        $this->get('/authors/save-froms-editorial-team')->assertRedirect('/authors/alex-roy');
+        $this->get('/authors/alex-roy')->assertOk()
+            ->assertSee('<h1 style="margin:10px 0 0">Alex Roy</h1>', false)->assertSee('"@type":"Person"', false)->assertSee('pen name')
             ->assertSee('Download YouTube Shorts on Mobile')
             ->assertSee('"@type":"ProfilePage"', false);
 
@@ -311,6 +312,39 @@ class SeoPagesTest extends TestCase
             return substr_count($post->content, 'href="/') >= 2;
         })->count();
         $this->assertGreaterThanOrEqual(40, $linked, 'most posts should carry at least two internal links');
+    }
+
+    public function test_on_site_batch_hubs_pagination_topics_404_and_robots()
+    {
+        foreach (['download-troubleshooting', 'how-to-download-videos'] as $slug) {
+            $page = LandingPage::active()->where('slug', $slug)->first();
+            $this->assertGreaterThan(900, str_word_count(strip_tags($page->content)), $slug.' is thin');
+            $this->assertCount(6, $page->faq_items);
+        }
+
+        $this->get('/supported-sites')->assertOk()
+            ->assertSee('<title>Supported Sites – Every Video Downloader We Offer | Save-Froms</title>', false)
+            ->assertSee('Which downloader should you start with?')->assertSee('Supported sites FAQ');
+
+        $this->get('/blog')->assertOk()->assertSee('<h1>Video Download Guides</h1>', false)
+            ->assertSee('<link rel="canonical" href="'.route('blog').'">', false)->assertSee('/guides/youtube');
+        $this->get('/blog?page=2')->assertOk()->assertSee('Video Download Guides – Page 2')
+            ->assertSee('<link rel="canonical" href="'.route('blog').'?page=2">', false);
+        $this->get('/blog?page=99')->assertNotFound();
+
+        $this->get('/guides/youtube')->assertOk()->assertSee('<h1>YouTube Download Guides</h1>', false)
+            ->assertSee('/blog/youtube-4k-video-download-mp4-2160p-quality-guide')->assertSee('"@type":"CollectionPage"', false)
+            ->assertDontSee('/blog/ar-youtube-video-download-mp4-quality-guide');
+        $this->get('/guides/formats-and-quality')->assertOk()->assertSee('/blog/mp4-to-mp3-converter-or-audio-download-guide');
+        $this->get('/guides/nope')->assertNotFound();
+        $this->get('/youtube-downloader')->assertSee('/guides/youtube');
+        $this->get('/sitemap.xml')->assertSee('/guides/tiktok</loc>', false);
+
+        $this->get('/no-such-page-xyz')->assertNotFound()->assertSee('That page is not here')->assertSee('/youtube-downloader')
+            ->assertSee('<meta name="robots" content="noindex,follow">', false);
+
+        $this->get('/robots.txt')->assertOk()->assertSee('Disallow: /prepare-download/')->assertDontSee('download-processing');
+        $this->assertFileDoesNotExist(public_path('sitemap.xml'));
     }
 
     public function test_homepage_declares_web_application_schema()

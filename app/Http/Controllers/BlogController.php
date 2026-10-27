@@ -5,16 +5,42 @@ namespace App\Http\Controllers;
 use App\Models\BlogPost;
 use App\Models\LandingPage;
 use App\Models\SupportedSite;
+use App\Support\GuideTopics;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $page = max(1, (int) $request->query('page', 1));
+        $posts = BlogPost::published()->latest('published_at')->latest('id')->paginate(12);
+        if ($page > 1 && $page > $posts->lastPage()) {
+            abort(404);
+        }
+        $suffix = $page > 1 ? ' – Page '.$page : '';
+
         return view('blog', [
-            'posts' => BlogPost::published()->latest('published_at')->paginate(12),
-            'title' => 'Media Download Guides & Tips — Save-Froms Blog',
-            'description' => 'Explore practical public-media download guides for YouTube, Instagram, TikTok, Facebook, X, Vimeo, Dailymotion and Twitch links.',
+            'posts' => $posts,
+            'title' => 'Video Download Guides'.$suffix.' | Save-Froms',
+            'description' => $page > 1
+                ? 'Page '.$page.' of the Save-Froms video download guides: links, formats, quality and fixes for YouTube, Instagram, TikTok, Facebook and more.'
+                : 'Step-by-step guides for downloading public videos from YouTube, Instagram, TikTok, Facebook, X, Vimeo, Dailymotion and Twitch: links, formats, quality and fixes.',
+            'canonical' => $page > 1 ? route('blog').'?page='.$page : route('blog'),
+        ]);
+    }
+
+    public function topic(string $slug)
+    {
+        $topic = GuideTopics::find($slug);
+        abort_unless($topic, 404);
+
+        return view('guides-topic', [
+            'topic' => $topic,
+            'topics' => GuideTopics::all(),
+            'posts' => GuideTopics::posts($slug),
+            'title' => $topic['title'],
+            'description' => $topic['description'],
         ]);
     }
 
@@ -23,8 +49,8 @@ class BlogController extends Controller
         return view('author', [
             'posts' => BlogPost::published()->latest('published_at')->latest('id')->get(),
             'platforms' => SupportedSite::active()->orderBy('sort_order')->get(),
-            'title' => 'Save-Froms Editorial Team – Author Profile',
-            'description' => 'Who writes and maintains the Save-Froms download guides, what they are responsible for, how guides are tested, and every published article.',
+            'title' => 'Alex Roy – Editor of the Save-Froms Download Guides',
+            'description' => 'Alex Roy writes and maintains every Save-Froms download guide: who Alex is, what the guides cover, how each claim is tested, and the full list of articles.',
         ]);
     }
 
