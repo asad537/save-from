@@ -205,6 +205,22 @@ class SeoPagesTest extends TestCase
         $this->assertGreaterThan(850, str_word_count(strip_tags(\App\Models\HomepageContent::first()->content)));
     }
 
+    public function test_tool_pages_are_no_longer_thin_and_youtube_pages_show_a_real_result()
+    {
+        foreach (['youtube-mp3-downloader', 'instagram-stories-downloader', 'tiktok-mp3-downloader', 'tiktok-mp4-downloader', 'facebook-reels-downloader', 'instagram-reels-downloader'] as $slug) {
+            $page = LandingPage::active()->where('slug', $slug)->first();
+            $this->assertNotNull($page, $slug);
+            $this->assertGreaterThan(900, str_word_count(strip_tags($page->content)), $slug.' is thin');
+            $this->assertGreaterThanOrEqual(4, count($page->faq_items), $slug.' lacks FAQs');
+            $this->get('/'.$slug)->assertOk()->assertSee('<section class="landing-faq">', false);
+        }
+
+        $this->assertFileExists(public_path('images/screenshots/youtube-result-big-buck-bunny.jpg'));
+        $this->get('/youtube-downloader')->assertOk()->assertSee('images/screenshots/youtube-result-big-buck-bunny.jpg')->assertSee('result-figure', false);
+        $this->get('/youtube-to-mp4')->assertOk()->assertSee('images/screenshots/youtube-result-big-buck-bunny.jpg');
+        $this->get('/tiktok-downloader')->assertOk()->assertSee('Photo-mode posts and slideshows');
+    }
+
     public function test_homepage_declares_web_application_schema()
     {
         $this->get('/')->assertSee('"@type":"WebApplication"', false);
