@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
 Disallow: /admin/
-Disallow: /download-processing/
+Disallow: /analyze
+Disallow: /prepare-download/
+Disallow: /download-file/
 
 Sitemap: https://save-froms.net/sitemap.xml
