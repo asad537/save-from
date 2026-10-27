@@ -9,9 +9,10 @@
     @php($socialImage = !empty($ogImage) ? (Str::startsWith($ogImage, ['http://','https://']) ? $ogImage : asset($ogImage)) : asset('images/hero-landscape.png'))
     <meta property="og:title" content="{{ $title ?? 'Save-Froms' }}"><meta property="og:description" content="{{ $description ?? 'Download public media fast with Save-Froms.' }}"><meta property="og:type" content="{{ isset($post) ? 'article' : 'website' }}"><meta property="og:url" content="{{ url()->current() }}"><meta property="og:site_name" content="Save-Froms"><meta property="og:locale" content="{{ ['en' => 'en_US', 'ar' => 'ar_AR', 'pt' => 'pt_BR', 'ur' => 'ur_PK', 'hi' => 'hi_IN'][$language ?? 'en'] ?? 'en_US' }}"><meta property="og:image" content="{{ $socialImage }}"><meta property="og:image:alt" content="{{ $title ?? 'Save-Froms media downloader' }}">
     <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{{ $title ?? 'Save-Froms' }}"><meta name="twitter:description" content="{{ $description ?? 'Download public media fast with Save-Froms.' }}"><meta name="twitter:image" content="{{ $socialImage }}">
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preload" href="{{ asset('fonts/dm-sans-400-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ asset('fonts/space-grotesk-500-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="{{ asset('css/fonts.css') }}?v=20261027">
+    <link rel="stylesheet" href="{{ asset('css/icons.css') }}?v=20261027">
     <link rel="icon" href="{{ asset('images/save-froms-icon.svg') }}" type="image/svg+xml">
     <link rel="stylesheet" href="{{ asset('css/brand.css') }}">
     @if(($language ?? 'en') !== 'ar')<script src="{{ asset('js/language-switcher.js') }}" defer></script>@endif

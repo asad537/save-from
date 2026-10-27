@@ -265,6 +265,34 @@ class SeoPagesTest extends TestCase
         $this->assertNull(SupportedSite::active()->where('slug', 'reddit-downloader')->first());
     }
 
+    public function test_public_pages_are_served_from_cache_and_assets_are_local()
+    {
+        $first = $this->get('/youtube-downloader');
+        $first->assertOk()->assertHeader('X-Page-Cache', 'MISS');
+        $this->get('/youtube-downloader')->assertOk()->assertHeader('X-Page-Cache', 'HIT')->assertSee('<h1><em>YouTube</em> Video Downloader</h1>', false);
+
+        // Pages that render session state are never cached.
+        $this->get('/admin/login')->assertHeaderMissing('X-Page-Cache');
+        $this->get('/sitemap.xml')->assertHeaderMissing('X-Page-Cache');
+        $this->get('/youtube-downloader?utm_source=x')->assertHeaderMissing('X-Page-Cache');
+        $this->withSession(['download_result' => ['url' => 'x', 'platform' => ['name' => 'YouTube', 'slug' => 'youtube-downloader'], 'formats' => [], 'title' => 't', 'thumbnail' => null, 'duration' => '']])
+            ->get('/')->assertOk()->assertHeaderMissing('X-Page-Cache');
+
+        // The downloader form works without a session-bound CSRF token.
+        $this->post('/analyze', ['url' => 'not a url'])->assertStatus(302)->assertSessionHasErrors('url');
+
+        $home = $this->get('/');
+        $home->assertDontSee('fonts.googleapis.com')->assertDontSee('cdn.jsdelivr.net')
+            ->assertSee('css/fonts.css')->assertSee('css/icons.css')->assertSee('fonts/dm-sans-400-latin.woff2');
+        foreach (['fonts/dm-sans-400-latin.woff2', 'fonts/space-grotesk-500-latin.woff2', 'css/fonts.css', 'css/icons.css'] as $asset) {
+            $this->assertFileExists(public_path($asset));
+        }
+        $icons = file_get_contents(public_path('css/icons.css'));
+        foreach (['download', 'youtube', 'threads', 'chevron-right', 'list', 'x-lg'] as $icon) {
+            $this->assertStringContainsString('.bi-'.$icon.'{', $icons);
+        }
+    }
+
     public function test_homepage_declares_web_application_schema()
     {
         $this->get('/')->assertSee('"@type":"WebApplication"', false);
