@@ -106,6 +106,51 @@ class SeoPagesTest extends TestCase
         $this->get('/youtube-shorts-downloader')->assertOk()->assertSee('How to download a YouTube Short on iPhone');
     }
 
+    public function test_duplicate_tool_pages_redirect_to_their_platform_hub()
+    {
+        $this->get('/download-vimeo-videos')->assertRedirect('/vimeo-downloader');
+        $this->get('/dailymotion-to-mp4')->assertRedirect('/dailymotion-downloader');
+        $this->get('/youtube-link-downloader')->assertRedirect('/youtube-downloader');
+
+        $this->assertFalse(LandingPage::active()->whereIn('slug', ['download-vimeo-videos', 'dailymotion-to-mp4', 'youtube-link-downloader'])->exists());
+        $this->get('/sitemap.xml')->assertDontSee('/download-vimeo-videos</loc>', false)->assertDontSee('/dailymotion-to-mp4</loc>', false)->assertDontSee('/youtube-link-downloader</loc>', false);
+        $this->get('/blog/download-video-web-page-find-public-source-link-guide')->assertOk()->assertDontSee('/youtube-link-downloader')->assertSee('YouTube Video Downloader');
+    }
+
+    public function test_tool_pages_use_exact_match_headings_and_short_titles()
+    {
+        $this->get('/vimeo-downloader')->assertOk()->assertSee('<h1><em>Vimeo</em> Video Downloader</h1>', false)->assertSee('<title>Vimeo Video Downloader – Save Vimeo Videos as MP4 | Save-Froms</title>', false);
+        $this->get('/dailymotion-downloader')->assertOk()->assertSee('<h1><em>Dailymotion</em> Video Downloader</h1>', false);
+        $this->get('/youtube-shorts-downloader')->assertOk()->assertSee('<h1><em>YouTube Shorts</em> Downloader</h1>', false);
+        $this->get('/tiktok-mp4-downloader')->assertOk()->assertSee('<h1><em>TikTok MP4</em> Downloader</h1>', false);
+        $this->get('/instagram-stories-downloader')->assertOk()->assertSee('<h1><em>Instagram Stories</em> Downloader</h1>', false);
+
+        foreach (SupportedSite::active()->get() as $site) {
+            $this->assertLessThanOrEqual(62, mb_strlen($site->meta_title), $site->slug.' title too long');
+        }
+        foreach (LandingPage::active()->get() as $page) {
+            $this->assertLessThanOrEqual(62, mb_strlen($page->meta_title ?: $page->title), $page->slug.' title too long');
+        }
+    }
+
+    public function test_pages_declare_their_real_language()
+    {
+        $this->get('/blog/baixar-video-instagram-links-publicos-guia')->assertOk()
+            ->assertSee('<html lang="pt" dir="ltr">', false)
+            ->assertSee('<meta property="og:locale" content="pt_BR">', false);
+        $this->get('/blog/ar-youtube-video-download-mp4-quality-guide')->assertOk()
+            ->assertSee('<html lang="ar" dir="rtl">', false)
+            ->assertSee('<meta property="og:locale" content="ar_AR">', false);
+        $this->get('/youtube-downloader')->assertSee('<html lang="en" dir="ltr">', false)->assertSee('content="en_US"', false);
+    }
+
+    public function test_index_php_redirects_to_the_clean_url()
+    {
+        $this->get('/index.php')->assertRedirect('/');
+        $this->get('/index.php/youtube-downloader')->assertRedirect('/youtube-downloader');
+        $this->get('/index.php?utm_source=x')->assertStatus(301)->assertHeader('Location', 'http://localhost/?utm_source=x');
+    }
+
     public function test_homepage_declares_web_application_schema()
     {
         $this->get('/')->assertSee('"@type":"WebApplication"', false);

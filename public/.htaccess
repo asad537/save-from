@@ -9,6 +9,10 @@
     RewriteCond %{HTTP_HOST} !^save-froms\.net$ [NC]
     RewriteRule ^ https://save-froms.net%{REQUEST_URI} [L,R=301]
 
+    # /index.php and /index.php/... duplicate the clean URLs; send them there.
+    RewriteCond %{THE_REQUEST} \s/index\.php(/[^\s?]*)?(\?[^\s]*)?\s [NC]
+    RewriteRule ^index\.php(/(.*))?$ /$2 [L,R=301,NE]
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

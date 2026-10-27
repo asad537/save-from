@@ -169,6 +169,10 @@ Route::redirect('/privacy', '/privacy-policy', 301);
 Route::redirect('/terms', '/terms-of-service', 301);
 Route::redirect('/about-us', '/about', 301);
 Route::redirect('/contact-us', '/contact', 301);
+// Retired keyword pages that duplicated a platform hub (audit 2026-10-27): one page per intent.
+Route::redirect('/download-vimeo-videos', '/vimeo-downloader', 301);
+Route::redirect('/dailymotion-to-mp4', '/dailymotion-downloader', 301);
+Route::redirect('/youtube-link-downloader', '/youtube-downloader', 301);
 
 Route::get('/robots.txt', function () {
     return response("User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /download-processing/\nSitemap: ".url('/sitemap.xml'), 200)
