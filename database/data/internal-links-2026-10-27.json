@@ -1,0 +1,555 @@
+[
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "facebook-video-links-public-posts-watch-privacy",
+"replacements": [
+[
+"<p>In everyday search, FB means Facebook and “save from” usually means saving a video from a public post, Reel or Watch page. A profile URL, a Group homepage, a news feed and a search page are not enough because they do not identify one media item. Open the exact video first, then use Facebook's Share option to copy its link.</p>",
+"<p>In everyday search, FB means Facebook and “save from” usually means saving a video from a public post, <a href=\"/facebook-reels-downloader\">Reel</a> or Watch page. A profile URL, a Group homepage, a news feed and a search page are not enough because they do not identify one media item. Open the exact video first, then use Facebook's Share option to copy its link.</p>"
+],
+[
+"<p>Facebook uses several page types for media. A Reel is usually vertical and has a <code>/reel/</code> path; a Watch page often uses <code>/watch/?v=</code>; and a Page or profile video can use a <code>/videos/</code> address. They can all work when public, but a Story, live broadcast, event, private Group post or ordinary profile page is a different kind of link.</p>",
+"<p>Facebook uses several page types for media. A Reel is usually vertical and has a <code>/reel/</code> path; a Watch page often uses <code>/watch/?v=</code>; and a Page or profile video can use a <code>/videos/</code> address. They can all work when public, but a <a href=\"/blog/facebook-story-downloader-public-story-limits-guide\">Story</a>, live broadcast, event, private Group post or ordinary profile page is a different kind of link.</p>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "save-video-public-x-post-correct-url",
+"replacements": [
+[
+"<p>X re-encodes every uploaded video into up to three MP4 renditions at different sizes: around 320 × 568, 640 × 1136 and 1280 × 720 or 720 × 1280 for vertical clips, at roughly 0.4, 0.8 and 2 Mbps. The result lists them by bitrate rather than by a tidy \"720p\" label, so pick the largest row for the sharpest copy. A two-minute clip is about 6 MB, 12 MB and 30 MB across the three. X never serves 1080p for ordinary accounts; a sharper source exists only on the platform the creator uploaded from.</p>",
+"<p>X re-encodes every uploaded video into up to three MP4 renditions at different sizes: around 320 × 568, 640 × 1136 and 1280 × 720 or 720 × 1280 for vertical clips, at roughly 0.4, 0.8 and 2 Mbps. The result lists them by bitrate rather than by a tidy \"<a href=\"/blog/video-resolution-vs-file-size-360p-720p-1080p\">720p</a>\" label, so pick the largest row for the sharpest copy. A two-minute clip is about 6 MB, 12 MB and 30 MB across the three. X never serves 1080p for ordinary accounts; a sharper source exists only on the platform the creator uploaded from.</p>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "twitch-clips-vods-live-streams-public-link-guide",
+"replacements": [
+[
+"<p>A VOD is stored at the quality the stream was sent in, typically 1080p60 or 936p60 for partners and 720p or 720p60 for most others, plus lower transcodes (480p, 360p, 160p) when Twitch generated them. Clips are stored at the quality of the source at the moment they were made, usually 1080p60 or 720p60, and sometimes only 480p for an older Clip. A one-hour 1080p60 VOD is roughly 2.5 to 4 GB; a 30-second Clip is 5 to 15 MB. Twitch delivers both as MP4 with sound, so no joining step is needed.</p>",
+"<p>A VOD is stored at the quality the stream was sent in, typically 1080p60 or 936p60 for partners and <a href=\"/blog/video-resolution-vs-file-size-360p-720p-1080p\">720p</a> or 720p60 for most others, plus lower transcodes (480p, 360p, 160p) when Twitch generated them. Clips are stored at the quality of the source at the moment they were made, usually 1080p60 or 720p60, and sometimes only 480p for an older Clip. A one-hour 1080p60 VOD is roughly 2.5 to 4 GB; a 30-second Clip is 5 to 15 MB. Twitch delivers both as MP4 with sound, so no joining step is needed.</p>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "download-youtube-shorts-on-mobile",
+"replacements": [
+[
+"<li>Compare the MP4 options returned for that source and tap Download beside the quality you want.</li>",
+"<li>Compare the <a href=\"/youtube-to-mp4\">MP4</a> options returned for that source and tap Download beside the quality you want.</li>"
+],
+[
+"<p>Before troubleshooting the tool, open the copied URL in a private browser tab. If the Short plays without requiring your account, membership or age confirmation, it is more likely to be publicly accessible. Private, deleted, members-only, region-restricted and age-restricted Shorts may not return a file.</p>",
+"<p>Before <a href=\"/download-troubleshooting\">troubleshooting</a> the tool, open the copied URL in a private browser tab. If the Short plays without requiring your account, membership or age confirmation, it is more likely to be publicly accessible. Private, deleted, members-only, region-restricted and age-restricted Shorts may not return a file.</p>"
+],
+[
+"<p>Choose MP4 when you need the vertical picture and sound together. If the result includes an audio-only option, use it only when you are authorized to save that audio and do not need the visuals. Music and voice recordings can have separate rights from the video itself.</p>",
+"<p>Choose MP4 when you need the vertical picture and sound together. If the result includes an <a href=\"/youtube-mp3-downloader\">audio-only</a> option, use it only when you are authorized to save that audio and do not need the visuals. Music and voice recordings can have separate rights from the video itself.</p>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "tiktok-mp4-vs-mp3-download-format-guide",
+"replacements": [
+[
+"<p>Video quality is commonly described by resolution, such as 480p, 720p or 1080p. Audio quality may be described with a bitrate such as 128 kbps or 256 kbps. Higher numbers can preserve more detail, but they also tend to increase file size. The source encoding remains important: converting a low-quality source to a larger number does not recreate detail that was never there.</p>",
+"<p>Video quality is commonly described by resolution, such as 480p, <a href=\"/blog/video-resolution-vs-file-size-360p-720p-1080p\">720p</a> or 1080p. Audio quality may be described with a bitrate such as 128 kbps or 256 kbps. Higher numbers can preserve more detail, but they also tend to increase file size. The source encoding remains important: converting a low-quality source to a larger number does not recreate detail that was never there.</p>"
+],
+[
+"<p>Format and watermark are separate issues. MP4 simply describes a media container, while MP3 describes an audio format. Do not assume that choosing MP4 changes or removes creator attribution. The file returned depends on the source available to the provider. Save-Froms does not promise watermark removal.</p>",
+"<p>Format and <a href=\"/blog/download-tiktok-videos-without-watermark-public-link-guide\">watermark</a> are separate issues. MP4 simply describes a media container, while MP3 describes an audio format. Do not assume that choosing MP4 changes or removes creator attribution. The file returned depends on the source available to the provider. Save-Froms does not promise watermark removal.</p>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "savefrom-not-working-link-preparing-403-fixes",
+"replacements": [
+[
+"<li>Try a direct lower-resolution option such as 360p or 720p.</li>",
+"<li>Try a direct lower-resolution option such as 360p or <a href=\"/blog/video-resolution-vs-file-size-360p-720p-1080p\">720p</a>.</li>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "savefrom-video-downloader-mobile-android-iphone",
+"replacements": [
+[
+"<p>The source determines which resolutions appear. Compare the estimated sizes shown on the result instead of assuming that every video has the same 720p or 1080p file size.</p>",
+"<p>The source determines which resolutions appear. Compare the estimated sizes shown on the result instead of assuming that every video has the same <a href=\"/blog/video-resolution-vs-file-size-360p-720p-1080p\">720p</a> or 1080p file size.</p>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "youtube-downloader-not-working-fix",
+"replacements": [
+[
+"<p>Give the result one reasonable attempt. If it remains unchanged, do not keep an old result tab open for hours. Copy the original public YouTube URL, return to the <a href=\"/youtube-downloader\">YouTube downloader page</a> and request a fresh analysis. The source may now return a different set of formats. Use only the format rows actually shown; a public video does not guarantee 1080p, 4K, MP3 or every resolution.</p>",
+"<p>Give the result one reasonable attempt. If it remains unchanged, do not keep an old result tab open for hours. Copy the original public YouTube URL, return to the <a href=\"/youtube-downloader\">YouTube downloader page</a> and request a fresh analysis. The source may now return a different set of formats. Use only the format rows actually shown; a public video does not guarantee 1080p, <a href=\"/blog/youtube-4k-video-download-mp4-2160p-quality-guide\">4K</a>, <a href=\"/youtube-mp3-downloader\">MP3</a> or every resolution.</p>"
+],
+[
+"<p>A 403 error after you press Download often concerns the generated file link rather than your account. Media delivery URLs commonly have a short lifetime. A link copied from an old result page, browser history or another device may have expired by the time it is opened.</p>",
+"<p>A <a href=\"/download-troubleshooting\">403</a> error after you press Download often concerns the generated file link rather than your account. Media delivery URLs commonly have a short lifetime. A link copied from an old result page, browser history or another device may have expired by the time it is opened.</p>"
+],
+[
+"<p>MP4 is usually the easiest choice for watching a permitted video on phones, tablets and computers. A smaller resolution may finish more reliably on limited storage, while a higher resolution can be useful on a larger screen when it is genuinely returned by the source. MP3 is audio only, so it is not a replacement for a video file. Compare the format label, quality and estimated file size before choosing.</p>",
+"<p><a href=\"/youtube-to-mp4\">MP4</a> is usually the easiest choice for watching a permitted video on phones, tablets and computers. A smaller resolution may finish more reliably on limited storage, while a higher resolution can be useful on a larger screen when it is genuinely returned by the source. MP3 is audio only, so it is not a replacement for a video file. Compare the format label, quality and estimated file size before choosing.</p>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "download-video-yt-mobile-guide",
+"replacements": [
+[
+"<li><strong>You see 403 Forbidden after pressing Download.</strong> The temporary file link may have expired. Analyse the original public video link again instead of reopening an old result.</li>",
+"<li><strong>You see <a href=\"/download-troubleshooting\">403</a> Forbidden after pressing Download.</strong> The temporary file link may have expired. Analyse the original public video link again instead of reopening an old result.</li>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "ss-youtube-public-video-link-guide",
+"replacements": [
+[
+"<p>A video’s available formats are determined by the source. One public upload might return MP4 video at several resolutions, while another may return fewer choices or only an audio option. A page cannot create a missing resolution simply because it is requested.</p>",
+"<p>A video’s available formats are determined by the source. One public upload might return <a href=\"/youtube-to-mp4\">MP4</a> video at several resolutions, while another may return fewer choices or only an audio option. A page cannot create a missing resolution simply because it is requested.</p>"
+],
+[
+"<p>MP4 is usually the most convenient choice for a video you plan to watch on a phone, tablet or computer. WEBM can be useful in modern browsers and compatible players. MP3 is audio only, so it is better suited to permitted music, talks or podcasts when audio is what you need.</p>",
+"<p>MP4 is usually the most convenient choice for a video you plan to watch on a phone, tablet or computer. WEBM can be useful in modern browsers and compatible players. <a href=\"/youtube-mp3-downloader\">MP3</a> is audio only, so it is better suited to permitted music, talks or podcasts when audio is what you need.</p>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "save-from-ig-public-reels-posts-guide",
+"replacements": [
+[
+"<p>If the page shows <em>Preparing</em>, the source streams may still be being checked. Give it one short attempt, then submit the original post URL again for a fresh result. If a Download button leads to a 403 error, the temporary file address may have expired; return to the original Instagram post instead of reusing the old file URL.</p>",
+"<p>If the page shows <em>Preparing</em>, the source streams may still be being checked. Give it one short attempt, then submit the original post URL again for a fresh result. If a Download button leads to a <a href=\"/download-troubleshooting\">403</a> error, the temporary file address may have expired; return to the original Instagram post instead of reusing the old file URL.</p>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "youtube-video-download-from-youtube-public-link-guide",
+"replacements": [
+[
+"<p>This keyword describes an intent, not an official YouTube feature. It is commonly used by viewers who have found a public video on YouTube and want to know whether a compatible MP4 video or MP3 audio option is available for that specific source. Results are source-dependent: one public upload may show several video resolutions, another may show a smaller set, and some links may not return a file at all.</p>",
+"<p>This keyword describes an intent, not an official YouTube feature. It is commonly used by viewers who have found a public video on YouTube and want to know whether a compatible <a href=\"/youtube-to-mp4\">MP4</a> video or <a href=\"/youtube-mp3-downloader\">MP3</a> audio option is available for that specific source. Results are source-dependent: one public upload may show several video resolutions, another may show a smaller set, and some links may not return a file at all.</p>"
+],
+[
+"<p>An individual public Short can be checked like an individual public video. Use the Short’s own Share link, not a channel or Shorts-feed address.</p>",
+"<p>An individual public Short can be checked like an individual public video. Use the Short’s own Share link, not a channel or <a href=\"/youtube-shorts-downloader\">Shorts</a>-feed address.</p>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "instagram-video-downloader-public-links-formats-guide",
+"replacements": [
+[
+"<p>An <strong>Instagram video downloader</strong> is most useful when you begin with one clear, public media link. The tool can then check the formats returned for that exact Reel or video post. The important details are not a generic promise of “HD” or a copied temporary URL: they are the source link, the real file choices, your device storage and whether you have permission to save the media.</p>",
+"<p>An <strong>Instagram video downloader</strong> is most useful when you begin with one clear, public media link. The tool can then check the formats returned for that exact <a href=\"/instagram-reels-downloader\">Reel</a> or video post. The important details are not a generic promise of “HD” or a copied temporary URL: they are the source link, the real file choices, your device storage and whether you have permission to save the media.</p>"
+],
+[
+"<p>Instagram contains different kinds of pages: profiles, Reels, video posts, carousels, Stories, live pages and search results. A downloader works best when the link points to one public media item, because that item has a specific source and may have a specific set of compatible resources. A profile URL cannot tell a browser which one of many posts you want to review.</p>",
+"<p>Instagram contains different kinds of pages: profiles, Reels, video posts, carousels, <a href=\"/instagram-stories-downloader\">Stories</a>, live pages and search results. A downloader works best when the link points to one public media item, because that item has a specific source and may have a specific set of compatible resources. A profile URL cannot tell a browser which one of many posts you want to review.</p>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "facebook-to-mp4-public-video-format-guide",
+"replacements": [
+[
+"<p>A <strong>Facebook to MP4</strong> workflow does not convert every Facebook page into a video file. It first needs one public video, Reel or Watch URL. When the source provides compatible video resources, the results can include MP4 options with different quality and size. The file choices come from that individual source, not from a universal promise that every video can become HD MP4.</p>",
+"<p>A <strong>Facebook to MP4</strong> workflow does not convert every Facebook page into a video file. It first needs one public video, <a href=\"/facebook-reels-downloader\">Reel</a> or Watch URL. When the source provides compatible video resources, the results can include MP4 options with different quality and size. The file choices come from that individual source, not from a universal promise that every video can become HD MP4.</p>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "facebook-story-downloader-public-story-limits-guide",
+"replacements": [
+[
+"<p>Stories are designed to disappear after a limited period and the creator controls who can view them. Unlike a public Page video or public Reel, a Story may not have a stable public address that works while signed out. A link can also stop working when the Story expires, is deleted or has its audience changed.</p>",
+"<p>Stories are designed to disappear after a limited period and the creator controls who can view them. Unlike a public Page video or public <a href=\"/facebook-reels-downloader\">Reel</a>, a Story may not have a stable public address that works while signed out. A link can also stop working when the Story expires, is deleted or has its audience changed.</p>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "instagram-to-mp4-public-reels-video-quality-guide",
+"replacements": [
+[
+"<p><strong>Instagram to MP4</strong> means checking whether one public Reel or video post has a compatible MP4 file available. It does not mean every Instagram link can be converted. A profile, a private account, an image-only post, a Story or a login wall does not provide the same kind of public video source as an individual Reel.</p>",
+"<p><strong>Instagram to MP4</strong> means checking whether one public <a href=\"/instagram-reels-downloader\">Reel</a> or video post has a compatible MP4 file available. It does not mean every Instagram link can be converted. A profile, a private account, an image-only post, a <a href=\"/instagram-stories-downloader\">Story</a> or a login wall does not provide the same kind of public video source as an individual Reel.</p>"
+],
+[
+"<p>If no result appears, make sure you copied a Reel or video post rather than a photo, profile or private link. If a Download action later returns 403, the temporary delivery link may have expired; return to the original public Instagram URL and request a new result. The <a href=\"/blog/instagram-video-downloader-public-links-formats-guide\">Instagram video downloader guide</a> explains phone storage locations and other browser checks.</p>",
+"<p>If no result appears, make sure you copied a Reel or video post rather than a photo, profile or private link. If a Download action later returns <a href=\"/download-troubleshooting\">403</a>, the temporary delivery link may have expired; return to the original public Instagram URL and request a new result. The <a href=\"/blog/instagram-video-downloader-public-links-formats-guide\">Instagram video downloader guide</a> explains phone storage locations and other browser checks.</p>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "tiktok-to-mp4-public-video-quality-guide",
+"replacements": [
+[
+"<p>A <strong>TikTok to MP4</strong> search usually starts with one individual public TikTok video. The important part is the link you copy and the actual file options returned for it. A profile, a For You feed, a sound page or a search page contains many posts, so it cannot identify a single video for review.</p>",
+"<p>A <strong>TikTok to MP4</strong> search usually starts with one individual public TikTok video. The important part is the link you copy and the actual file options returned for it. A profile, a For You feed, a <a href=\"/tiktok-mp3-downloader\">sound</a> page or a search page contains many posts, so it cannot identify a single video for review.</p>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "youtube-to-mp4-1080p-public-link-quality-guide",
+"replacements": [
+[
+"<p>A search for <strong>YouTube to MP4 1080p</strong> is really a question about the original video and its available streams. A public YouTube watch, Shorts or youtu.be link may return a 1080p option when that resolution exists and the source provides a compatible resource. It is not a guarantee that every link can become Full HD.</p>",
+"<p>A search for <strong>YouTube to MP4 1080p</strong> is really a question about the original video and its available streams. A public YouTube watch, <a href=\"/youtube-shorts-downloader\">Shorts</a> or youtu.be link may return a 1080p option when that resolution exists and the source provides a compatible resource. It is not a guarantee that every link can become Full HD.</p>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "vimeo-to-mp4-public-video-privacy-quality-guide",
+"replacements": [
+[
+"<p>If a previously working download gives 403, the temporary file URL probably expired. Return to the original public Vimeo video URL for a fresh result. The <a href=\"/blog/download-vimeo-videos-public-links-passwords-privacy-guide\">Vimeo public-link guide</a> explains privacy modes in more detail.</p>",
+"<p>If a previously working download gives <a href=\"/download-troubleshooting\">403</a>, the temporary file URL probably expired. Return to the original public Vimeo video URL for a fresh result. The <a href=\"/blog/download-vimeo-videos-public-links-passwords-privacy-guide\">Vimeo public-link guide</a> explains privacy modes in more detail.</p>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "tiktok-audio-downloader-public-video-links-guide",
+"replacements": [
+[
+"<p>If the visual part matters—such as captions, a tutorial or a demonstration—choose an MP4 result instead. Our <a href=\"/blog/tiktok-mp4-vs-mp3-download-format-guide\">TikTok MP4 vs MP3 guide</a> compares the two formats in more detail.</p>",
+"<p>If the visual part matters—such as captions, a tutorial or a demonstration—choose an <a href=\"/tiktok-mp4-downloader\">MP4</a> result instead. Our <a href=\"/blog/tiktok-mp4-vs-mp3-download-format-guide\">TikTok MP4 vs MP3 guide</a> compares the two formats in more detail.</p>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "youtube-downloader-safety-public-link-permissions-guide",
+"replacements": [
+[
+"<p>Before saving, check the container, quality and estimated size. MP4 is broadly compatible for video playback, while MP3 is audio-only when the source returns an audio option. A larger resolution can use more storage, but it cannot restore detail that was not present in the original upload. The <a href=\"/blog/video-resolution-vs-file-size-360p-720p-1080p\">resolution and file-size guide</a> explains this trade-off.</p>",
+"<p>Before saving, check the container, quality and estimated size. <a href=\"/youtube-to-mp4\">MP4</a> is broadly compatible for video playback, while <a href=\"/youtube-mp3-downloader\">MP3</a> is audio-only when the source returns an audio option. A larger resolution can use more storage, but it cannot restore detail that was not present in the original upload. The <a href=\"/blog/video-resolution-vs-file-size-360p-720p-1080p\">resolution and file-size guide</a> explains this trade-off.</p>"
+],
+[
+"<p>Temporary download URLs can expire. If a file request later returns a 403 error, do not keep retrying that old address. Start again from the original public YouTube video URL, wait for a fresh result, and choose from the current options.</p>",
+"<p>Temporary download URLs can expire. If a file request later returns a <a href=\"/download-troubleshooting\">403</a> error, do not keep retrying that old address. Start again from the original public YouTube video URL, wait for a fresh result, and choose from the current options.</p>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "youtube-shorts-to-mp3-public-audio-options-guide",
+"replacements": [
+[
+"<p>For an authorised voice recording, a modest listed quality may be enough and easier to store. For music you own or license, listen to a short section before keeping the file. The file size also depends on the Short's duration and the audio bitrate. If you need to preserve the visual post, choose MP4 instead and see the <a href=\"/youtube-shorts-downloader\">YouTube Shorts downloader</a> page for portrait-video guidance.</p>",
+"<p>For an authorised voice recording, a modest listed quality may be enough and easier to store. For music you own or license, listen to a short section before keeping the file. The file size also depends on the Short's duration and the audio bitrate. If you need to preserve the visual post, choose <a href=\"/youtube-to-mp4\">MP4</a> instead and see the <a href=\"/youtube-shorts-downloader\">YouTube Shorts downloader</a> page for portrait-video guidance.</p>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "audio-downloader-public-video-links-available-audio-guide",
+"replacements": [
+[
+"<li><strong>Old download link returns 403:</strong> temporary media links expire; check the original public URL again.</li>",
+"<li><strong>Old download link returns <a href=\"/download-troubleshooting\">403</a>:</strong> temporary media links expire; check the original public URL again.</li>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "youtube-video-converter-vs-mp4-downloader-format-guide",
+"replacements": [
+[
+"<p>MP4 is broadly compatible and is a practical first choice for most devices. WEBM can offer useful high-quality results in current browsers and players such as VLC, but older televisions and some editors may not support it. Audio-only files are for permitted listening; they do not include captions, visuals or context from the video.</p>",
+"<p>MP4 is broadly compatible and is a practical first choice for most devices. WEBM can offer useful high-quality results in current browsers and players such as VLC, but older televisions and some editors may not support it. <a href=\"/youtube-mp3-downloader\">Audio-only</a> files are for permitted listening; they do not include captions, visuals or context from the video.</p>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "download-vimeo-videos-public-links-passwords-privacy-guide",
+"replacements": [
+[
+"<p>Vimeo encodes public videos at 240p, 360p, 540p, 720p, 1080p and, for Plus and Pro uploads, 2K and 4K. Older free accounts stop at 720p or 1080p. A five-minute 1080p rendition is typically 60 to 120 MB because Vimeo uses higher bitrates than most platforms; 4K can reach 500 MB for the same length. Vimeo serves full MP4 files with sound at every level, so there is no video-only step.</p>",
+"<p>Vimeo encodes public videos at 240p, 360p, 540p, <a href=\"/blog/video-resolution-vs-file-size-360p-720p-1080p\">720p</a>, 1080p and, for Plus and Pro uploads, 2K and 4K. Older free accounts stop at 720p or 1080p. A five-minute 1080p rendition is typically 60 to 120 MB because Vimeo uses higher bitrates than most platforms; 4K can reach 500 MB for the same length. Vimeo serves full MP4 files with sound at every level, so there is no video-only step.</p>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "dailymotion-to-mp4-daily-links-quality-expiring-files-guide",
+"replacements": [
+[
+"<p>Download URLs are commonly temporary. A 403 or unavailable-file message usually means the delivery URL is no longer valid, not that the original video has changed. Return to the public Dailymotion page, paste the original link again and use the newly generated options. Do not keep refreshing the expired file URL.</p>",
+"<p>Download URLs are commonly temporary. A <a href=\"/download-troubleshooting\">403</a> or unavailable-file message usually means the delivery URL is no longer valid, not that the original video has changed. Return to the public Dailymotion page, paste the original link again and use the newly generated options. Do not keep refreshing the expired file URL.</p>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "instagram-story-downloader-story-saver-public-stories-guide",
+"replacements": [
+[
+"<p>Story links usually contain <code>/stories/username/</code> followed by a long number. A link with only the username, or a link to a post or Reel, points to a different kind of media and returns a different result.</p>",
+"<p>Story links usually contain <code>/stories/username/</code> followed by a long number. A link with only the username, or a link to a post or <a href=\"/instagram-reels-downloader\">Reel</a>, points to a different kind of media and returns a different result.</p>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "download-tiktok-videos-without-watermark-public-link-guide",
+"replacements": [
+[
+"<li>Compare the MP4 rows and any audio row, then download a file you are allowed to keep.</li>",
+"<li>Compare the MP4 rows and any <a href=\"/tiktok-mp3-downloader\">audio</a> row, then download a file you are allowed to keep.</li>"
+],
+[
+"<p>TikTok clips are usually 720p or 1080p, vertical, at a modest bitrate. A one-minute clip is typically 5 to 15 MB. If two MP4 rows show different sizes, the larger one is normally the higher bitrate, not a higher resolution. Choose the smaller file for sharing on messaging apps and the larger one for editing. The <a href=\"/tiktok-mp4-downloader\">TikTok MP4 Downloader</a> page explains the resolution and size trade-off in more detail.</p>",
+"<p>TikTok clips are usually <a href=\"/blog/video-resolution-vs-file-size-360p-720p-1080p\">720p</a> or 1080p, vertical, at a modest bitrate. A one-minute clip is typically 5 to 15 MB. If two MP4 rows show different sizes, the larger one is normally the higher bitrate, not a higher resolution. Choose the smaller file for sharing on messaging apps and the larger one for editing. The <a href=\"/tiktok-mp4-downloader\">TikTok MP4 Downloader</a> page explains the resolution and size trade-off in more detail.</p>"
+]
+]
+},
+{
+"table": "blog_posts",
+"column": "content",
+"slug": "download-youtube-clips-clip-link-vs-watch-link-guide",
+"replacements": [
+[
+"<p>Replace the times in the FFmpeg command with the clip's start and end. The <code>-c copy</code> option keeps the video and audio exactly as downloaded, so a 1080p source stays 1080p.</p>",
+"<p>Replace the times in the FFmpeg command with the clip's start and end. The <code>-c copy</code> option keeps the video and audio exactly as downloaded, so a <a href=\"/blog/video-resolution-vs-file-size-360p-720p-1080p\">1080p</a> source stays 1080p.</p>"
+],
+[
+"<p>A trimmed MP4 carries no link back to the creator. If you have permission to post it elsewhere, add the channel name and the original video link in the caption or description, keep the audio unchanged unless the creator agreed otherwise, and avoid cutting a sentence in a way that changes its meaning. Trimming on the device with <code>-c copy</code> also preserves the original resolution, so the clip looks exactly like the source instead of a re-compressed copy.</p>",
+"<p>A trimmed <a href=\"/youtube-to-mp4\">MP4</a> carries no link back to the creator. If you have permission to post it elsewhere, add the channel name and the original video link in the caption or description, keep the audio unchanged unless the creator agreed otherwise, and avoid cutting a sentence in a way that changes its meaning. Trimming on the device with <code>-c copy</code> also preserves the original resolution, so the clip looks exactly like the source instead of a re-compressed copy.</p>"
+],
+[
+"<p>Shorts cannot be clipped in the usual way; a <code>/shorts/</code> link is already a full video and downloads normally.</p>",
+"<p><a href=\"/youtube-shorts-downloader\">Shorts</a> cannot be clipped in the usual way; a <code>/shorts/</code> link is already a full video and downloads normally.</p>"
+]
+]
+},
+{
+"table": "landing_pages",
+"column": "content",
+"slug": "youtube-shorts-downloader",
+"replacements": [
+[
+"<li>Tap <strong>Download</strong>. Chrome saves the MP4 to the Downloads folder; it appears in Google Photos or Gallery within a few seconds.</li>",
+"<li>Tap <strong>Download</strong>. Chrome saves the <a href=\"/youtube-to-mp4\">MP4</a> to the Downloads folder; it appears in Google Photos or Gallery within a few seconds.</li>"
+]
+]
+},
+{
+"table": "landing_pages",
+"column": "content",
+"slug": "youtube-to-mp4",
+"replacements": [
+[
+"<li><strong>1440p and 2160p</strong>: usually WEBM only. If an MP4 row appears at these sizes it is AV1 and may not play on older devices.</li>",
+"<li><strong>1440p and <a href=\"/blog/youtube-4k-video-download-mp4-2160p-quality-guide\">2160p</a></strong>: usually WEBM only. If an MP4 row appears at these sizes it is AV1 and may not play on older devices.</li>"
+],
+[
+"<p>Use a normal watch URL, a <code>youtu.be</code> share link or an individual Shorts link. A channel, playlist, search page or general Shorts feed contains more than one item, so it is not a reliable source for a single file result. Private, members-only, deleted, age-restricted and region-restricted videos remain unavailable through a public-link workflow.</p>",
+"<p>Use a normal watch URL, a <code>youtu.be</code> share link or an individual <a href=\"/youtube-shorts-downloader\">Shorts</a> link. A channel, playlist, search page or general Shorts feed contains more than one item, so it is not a reliable source for a single file result. Private, members-only, deleted, age-restricted and region-restricted videos remain unavailable through a public-link workflow.</p>"
+],
+[
+"<p>Higher resolutions can be delivered as separate video and audio streams. That can mean a short preparation step before a file is ready. If a temporary link later returns 403, paste the original public YouTube URL again and choose from the new result list.</p>",
+"<p>Higher resolutions can be delivered as separate video and audio streams. That can mean a short preparation step before a file is ready. If a temporary link later returns <a href=\"/download-troubleshooting\">403</a>, paste the original public YouTube URL again and choose from the new result list.</p>"
+]
+]
+},
+{
+"table": "landing_pages",
+"column": "content",
+"slug": "instagram-reels-downloader",
+"replacements": [
+[
+"<p>Instagram keeps one public rendition per Reel, usually 720 × 1280 or 1080 × 1920 at 2 to 4 Mbps, so a 30-second Reel is about 5 to 15 MB. There is no quality menu because there is nothing to choose between. Reels uploaded with \"Upload at highest quality\" on, under Settings → Data usage and media quality, are the ones that come back at 1080p; the rest are 720p.</p>",
+"<p>Instagram keeps one public rendition per Reel, usually 720 × 1280 or 1080 × 1920 at 2 to 4 Mbps, so a 30-second Reel is about 5 to 15 MB. There is no quality menu because there is nothing to choose between. Reels uploaded with \"Upload at highest quality\" on, under Settings → Data usage and media quality, are the ones that come back at <a href=\"/blog/video-resolution-vs-file-size-360p-720p-1080p\">1080p</a>; the rest are 720p.</p>"
+]
+]
+},
+{
+"table": "landing_pages",
+"column": "content",
+"slug": "instagram-stories-downloader",
+"replacements": [
+[
+"<p>Instagram Stories normally disappear from public Story playback after a limited period unless the creator saves them as Highlights. For that reason, a copied Story URL can expire even when it worked earlier. Save-Froms can only check a link while the underlying public media remains accessible to the provider.</p>",
+"<p>Instagram Stories normally disappear from public Story playback after a limited period unless the creator saves them as <a href=\"/blog/instagram-story-downloader-story-saver-public-stories-guide\">Highlights</a>. For that reason, a copied Story URL can expire even when it worked earlier. Save-Froms can only check a link while the underlying public media remains accessible to the provider.</p>"
+]
+]
+},
+{
+"table": "landing_pages",
+"column": "content",
+"slug": "tiktok-mp4-downloader",
+"replacements": [
+[
+"<p>A TikTok MP4 downloader needs the link to one individual public video. Use TikTok's Share menu to copy the link, then open it in a private browser window to confirm it is publicly available. A profile, hashtag, sound page or For You feed has many posts and does not identify one MP4 source.</p>",
+"<p>A TikTok MP4 downloader needs the link to one individual public video. Use TikTok's Share menu to copy the link, then open it in a private browser window to confirm it is publicly available. A profile, hashtag, <a href=\"/tiktok-mp3-downloader\">sound</a> page or For You feed has many posts and does not identify one MP4 source.</p>"
+],
+[
+"<p>The rows for your link show the renditions TikTok returned at that moment. Vertical clips are listed by their height, so \"1080p\" is 1080 pixels wide and 1920 tall. Landscape clips, which are rare on TikTok, are letterboxed inside the vertical frame.</p>",
+"<p>The rows for your link show the renditions TikTok returned at that moment. Vertical clips are listed by their height, so \"<a href=\"/blog/video-resolution-vs-file-size-360p-720p-1080p\">1080p</a>\" is 1080 pixels wide and 1920 tall. Landscape clips, which are rare on TikTok, are letterboxed inside the vertical frame.</p>"
+]
+]
+},
+{
+"table": "landing_pages",
+"column": "content",
+"slug": "download-troubleshooting",
+"replacements": [
+[
+"<p>The domain is not active in Save-Froms or the submitted address belongs to a different website. Check the Supported Sites page and confirm the spelling of the hostname.</p>",
+"<p>The domain is not active in Save-Froms or the submitted address belongs to a different website. Check the <a href=\"/supported-sites\">Supported Sites page</a> and confirm the spelling of the hostname.</p>"
+]
+]
+},
+{
+"table": "landing_pages",
+"column": "content",
+"slug": "facebook-reels-downloader",
+"replacements": [
+[
+"<p>Facebook stores two renditions of most videos: SD (around 360p to 540p) and HD (720p or 1080p). The result shows both when they exist. A Reel uploaded from a phone with \"Upload in HD\" switched off in Facebook's settings exists only in SD, and that is all any tool can return. HD Reels are usually 15 to 40 MB per minute; SD about 5 to 10 MB.</p>",
+"<p>Facebook stores two renditions of most videos: SD (around 360p to 540p) and HD (<a href=\"/blog/video-resolution-vs-file-size-360p-720p-1080p\">720p</a> or 1080p). The result shows both when they exist. A Reel uploaded from a phone with \"Upload in HD\" switched off in Facebook's settings exists only in SD, and that is all any tool can return. HD Reels are usually 15 to 40 MB per minute; SD about 5 to 10 MB.</p>"
+]
+]
+},
+{
+"table": "supported_sites",
+"column": "description",
+"slug": "youtube-downloader",
+"replacements": [
+[
+"<li><strong>1440p / 2160p</strong>: often 400 MB to more than 1 GB, usually WEBM.</li>",
+"<li><strong>1440p / <a href=\"/blog/youtube-4k-video-download-mp4-2160p-quality-guide\">2160p</a></strong>: often 400 MB to more than 1 GB, usually WEBM.</li>"
+]
+]
+},
+{
+"table": "supported_sites",
+"column": "description",
+"slug": "instagram-downloader",
+"replacements": [
+[
+"<p>Instagram serves video from temporary CDN addresses that expire after a short period. That is why Save-Froms gives you a fresh result each time you analyse a link and why a result from yesterday cannot be reused. Stories additionally disappear after 24 hours unless they are saved as Highlights. Copy the post link from the app's <strong>Share → Copy link</strong> menu rather than the address shown inside an embedded player.</p>",
+"<p>Instagram serves video from temporary CDN addresses that expire after a short period. That is why Save-Froms gives you a fresh result each time you analyse a link and why a result from yesterday cannot be reused. Stories additionally disappear after 24 hours unless they are saved as <a href=\"/blog/instagram-story-downloader-story-saver-public-stories-guide\">Highlights</a>. Copy the post link from the app's <strong>Share → Copy link</strong> menu rather than the address shown inside an embedded player.</p>"
+]
+]
+},
+{
+"table": "supported_sites",
+"column": "description",
+"slug": "tiktok-downloader",
+"replacements": [
+[
+"<p>TikTok normally delivers two public versions of a clip: the standard one with the moving TikTok logo and username, and a cleaner version used by the player. Which versions appear depends entirely on what the provider returns for that link, so Save-Froms lists what exists instead of promising a watermark-free file. Where two MP4 options are shown, compare the quality labels and sizes; the larger file is usually the higher-bitrate version.</p>",
+"<p>TikTok normally delivers two public versions of a clip: the standard one with the moving TikTok logo and username, and a cleaner version used by the player. Which versions appear depends entirely on what the provider returns for that link, so Save-Froms lists what exists instead of promising a <a href=\"/blog/download-tiktok-videos-without-watermark-public-link-guide\">watermark</a>-free file. Where two MP4 options are shown, compare the quality labels and sizes; the larger file is usually the higher-bitrate version.</p>"
+],
+[
+"<li><strong>Choose MP4 or MP3</strong><span>Pick a video quality for the clip, or the audio track if you only need the sound.</span></li>",
+"<li><strong>Choose <a href=\"/blog/savefrom-mp4-vs-mp3-quality-size-guide\">MP4 or MP3</a></strong><span>Pick a video quality for the clip, or the audio track if you only need the sound.</span></li>"
+],
+[
+"<p>TikTok stores several renditions of each clip. The result normally shows the highest one served to the web player, typically 720p or 1080p vertical (1080 × 1920). A creator who uploaded with \"Allow high-quality uploads\" off will have a softer 720p source, and no row can improve on it. Two rows with the same resolution but different sizes are different bitrates: the larger one keeps more detail in fast motion and text.</p>",
+"<p>TikTok stores several renditions of each clip. The result normally shows the highest one served to the web player, typically <a href=\"/blog/video-resolution-vs-file-size-360p-720p-1080p\">720p</a> or 1080p vertical (1080 × 1920). A creator who uploaded with \"Allow high-quality uploads\" off will have a softer 720p source, and no row can improve on it. Two rows with the same resolution but different sizes are different bitrates: the larger one keeps more detail in fast motion and text.</p>"
+]
+]
+},
+{
+"table": "supported_sites",
+"column": "description",
+"slug": "facebook-downloader",
+"replacements": [
+[
+"<p>Save-Froms is a Facebook video downloader for <strong>public</strong> videos, Reels and Watch links. Paste the address of one public video and it lists the MP4 qualities the provider returns, typically an SD and an HD version, with estimated sizes. Nothing is installed and no Facebook login is involved.</p>",
+"<p>Save-Froms is a Facebook video downloader for <strong>public</strong> videos, <a href=\"/facebook-reels-downloader\">Reels</a> and Watch links. Paste the address of one public video and it lists the MP4 qualities the provider returns, typically an SD and an HD version, with estimated sizes. Nothing is installed and no Facebook login is involved.</p>"
+],
+[
+"<p>Facebook usually stores a standard-definition (around 360p–480p) and a high-definition (720p or 1080p) rendition of each public video. Both appear in the result when the provider returns them. Choose SD for quick sharing on mobile and HD for larger screens. The HD version is not always present for older uploads or videos recorded in low resolution.</p>",
+"<p>Facebook usually stores a standard-definition (around 360p–480p) and a high-definition (<a href=\"/blog/video-resolution-vs-file-size-360p-720p-1080p\">720p</a> or 1080p) rendition of each public video. Both appear in the result when the provider returns them. Choose SD for quick sharing on mobile and HD for larger screens. The HD version is not always present for older uploads or videos recorded in low resolution.</p>"
+]
+]
+},
+{
+"table": "supported_sites",
+"column": "description",
+"slug": "twitter-downloader",
+"replacements": [
+[
+"<p>X re-encodes uploads into several MP4 bitrates, commonly around 270p, 360p, 720p and sometimes 1080p. Save-Froms lists what is returned with its resolution and estimated size. GIFs on X are actually short looping MP4 files, so they download as MP4 rather than as an animated GIF.</p>",
+"<p>X re-encodes uploads into several MP4 bitrates, commonly around 270p, 360p, <a href=\"/blog/video-resolution-vs-file-size-360p-720p-1080p\">720p</a> and sometimes 1080p. Save-Froms lists what is returned with its resolution and estimated size. GIFs on X are actually short looping MP4 files, so they download as MP4 rather than as an animated GIF.</p>"
+]
+]
+},
+{
+"table": "supported_sites",
+"column": "description",
+"slug": "dailymotion-downloader",
+"replacements": [
+[
+"<p>Save-Froms is a Dailymotion video downloader for public videos. Paste a full <code>dailymotion.com/video/</code> address or a <code>dai.ly</code> short link and it lists the MP4 resolutions the provider returns, typically 240p to 1080p depending on the upload, with estimated file sizes.</p>",
+"<p>Save-Froms is a Dailymotion video downloader for public videos. Paste a full <code>dailymotion.com/video/</code> address or a <code>dai.ly</code> short link and it lists the MP4 resolutions the provider returns, typically 240p to <a href=\"/blog/video-resolution-vs-file-size-360p-720p-1080p\">1080p</a> depending on the upload, with estimated file sizes.</p>"
+]
+]
+},
+{
+"table": "supported_sites",
+"column": "description",
+"slug": "threads-downloader",
+"replacements": [
+[
+"<p>Threads is Meta's text-first app, but a large share of popular posts carry a video. Save-Froms reads one public Threads post link and returns the MP4 the post contains, usually at 720p, so you can keep a clip you made or one the creator allows you to save. Text-only posts and photo posts have no video, and the result says so.</p>",
+"<p>Threads is Meta's text-first app, but a large share of popular posts carry a video. Save-Froms reads one public Threads post link and returns the MP4 the post contains, usually at <a href=\"/blog/video-resolution-vs-file-size-360p-720p-1080p\">720p</a>, so you can keep a clip you made or one the creator allows you to save. Text-only posts and photo posts have no video, and the result says so.</p>"
+]
+]
+}
+]

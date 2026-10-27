@@ -56,6 +56,45 @@ class LandingPage extends Model
         return collect();
     }
 
+    /**
+     * Slug-token groups that pick the blog guides shown on each tool page.
+     * A post matches when its slug contains at least one token from every group.
+     */
+    const GUIDE_TOKENS = [
+        'youtube-shorts-downloader' => [['shorts']],
+        'youtube-to-mp4' => [['youtube'], ['mp4', '4k', 'converter', 'clips', 'resolution']],
+        'youtube-mp3-downloader' => [['youtube', 'audio', 'mp3'], ['mp3', 'audio']],
+        'instagram-reels-downloader' => [['instagram', 'ig'], ['reels', 'reel', 'mp4']],
+        'instagram-stories-downloader' => [['instagram'], ['story', 'stories']],
+        'tiktok-mp3-downloader' => [['tiktok'], ['mp3', 'audio']],
+        'tiktok-mp4-downloader' => [['tiktok'], ['mp4', 'watermark', 'videos']],
+        'facebook-reels-downloader' => [['facebook'], ['reel', 'reels']],
+        'download-troubleshooting' => [['working', 'fix', '403', 'fixes', 'safety']],
+        'how-to-download-videos' => [['how', 'web', 'mobile', 'link']],
+    ];
+
+    /**
+     * Blog guides that belong with this tool page, newest first.
+     */
+    public function relatedPosts($limit = 4)
+    {
+        $groups = self::GUIDE_TOKENS[$this->slug] ?? [];
+        if (!$groups) {
+            return collect();
+        }
+
+        return BlogPost::published()->where('language', 'en')->latest('published_at')->latest('id')->get(['id', 'title', 'slug'])
+            ->filter(function ($post) use ($groups) {
+                $tokens = explode('-', $post->slug);
+                foreach ($groups as $group) {
+                    if (!array_intersect($group, $tokens)) {
+                        return false;
+                    }
+                }
+                return true;
+            })->take($limit)->values();
+    }
+
     public function isHub()
     {
         return in_array($this->slug, self::HUB_SLUGS, true);

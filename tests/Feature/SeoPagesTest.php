@@ -293,6 +293,26 @@ class SeoPagesTest extends TestCase
         }
     }
 
+    public function test_contextual_internal_links_and_tool_page_guides()
+    {
+        $this->get('/youtube-to-mp4')->assertOk()
+            ->assertSee('YouTube to MP4 Downloader guides from the blog')
+            ->assertSee('/blog/youtube-4k-video-download-mp4-2160p-quality-guide')
+            ->assertSee('/blog/download-youtube-clips-clip-link-vs-watch-link-guide');
+        $this->get('/instagram-stories-downloader')->assertOk()->assertSee('/blog/instagram-story-downloader-story-saver-public-stories-guide');
+        $this->get('/tiktok-mp4-downloader')->assertOk()->assertSee('/blog/download-tiktok-videos-without-watermark-public-link-guide');
+        $this->get('/youtube-mp3-downloader')->assertOk()->assertSee('/blog/mp4-to-mp3-converter-or-audio-download-guide');
+
+        $this->get('/tiktok-downloader')->assertOk()->assertSee('<a href="/blog/download-tiktok-videos-without-watermark-public-link-guide">watermark</a>', false);
+        $this->get('/blog/youtube-video-download-from-youtube-public-link-guide')->assertOk()->assertSee('<a href="/youtube-shorts-downloader">Shorts</a>', false);
+        $this->get('/blog/instagram-video-downloader-public-links-formats-guide')->assertOk()->assertSee('<a href="/instagram-stories-downloader">Stories</a>', false);
+
+        $linked = BlogPost::published()->where('language', 'en')->get()->filter(function ($post) {
+            return substr_count($post->content, 'href="/') >= 2;
+        })->count();
+        $this->assertGreaterThanOrEqual(40, $linked, 'most posts should carry at least two internal links');
+    }
+
     public function test_homepage_declares_web_application_schema()
     {
         $this->get('/')->assertSee('"@type":"WebApplication"', false);
