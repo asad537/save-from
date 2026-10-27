@@ -173,6 +173,20 @@ class SeoPagesTest extends TestCase
         $this->get('/sitemap.xml')->assertSee('/blog/download-youtube-clips-clip-link-vs-watch-link-guide</loc>', false);
     }
 
+    public function test_thin_facebook_reels_post_is_merged_and_savefrom_search_is_expanded()
+    {
+        $this->get('/blog/download-facebook-reels-android-iphone-files-guide')->assertRedirect('/blog/facebook-reel-downloader-public-reels-mobile-guide');
+        $this->get('/sitemap.xml')->assertDontSee('download-facebook-reels-android-iphone-files-guide');
+
+        $merged = BlogPost::published()->where('slug', 'facebook-reel-downloader-public-reels-mobile-guide')->first();
+        $this->assertGreaterThan(1150, str_word_count(strip_tags($merged->content)));
+        $this->get('/blog/'.$merged->slug)->assertOk()->assertSee('Android and iPhone at a glance')->assertSee('/facebook-reels-downloader');
+
+        $savefrom = BlogPost::published()->where('slug', 'savefrom-search-public-link-guide')->first();
+        $this->assertGreaterThan(1350, str_word_count(strip_tags($savefrom->content)));
+        $this->get('/blog/'.$savefrom->slug)->assertOk()->assertSee('How to tell a safe downloader from a risky one')->assertSee('<title>SaveFrom Search: What People Want and How to Get It Safely</title>', false);
+    }
+
     public function test_homepage_declares_web_application_schema()
     {
         $this->get('/')->assertSee('"@type":"WebApplication"', false);

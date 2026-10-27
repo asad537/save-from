@@ -32,6 +32,8 @@ class BlogController extends Controller
     {
         $legacySlugs = [
             'download-video-yt-mobile-india-guide' => 'download-video-yt-mobile-guide',
+            // Merged into the Facebook Reel downloader guide on 2026-10-27.
+            'download-facebook-reels-android-iphone-files-guide' => 'facebook-reel-downloader-public-reels-mobile-guide',
         ];
         if (isset($legacySlugs[$slug])) {
             return redirect()->route('blog.show', $legacySlugs[$slug], 301);
