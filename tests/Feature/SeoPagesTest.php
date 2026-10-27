@@ -246,18 +246,22 @@ class SeoPagesTest extends TestCase
         }
     }
 
-    public function test_pinterest_and_threads_platform_pages_are_live()
+    public function test_threads_platform_page_is_live_and_pinterest_stays_off_until_prepare_works()
     {
-        foreach (['pinterest-downloader' => 'Pinterest', 'threads-downloader' => 'Threads'] as $slug => $name) {
-            $site = SupportedSite::active()->where('slug', $slug)->first();
-            $this->assertNotNull($site, $slug);
-            $this->assertGreaterThan(850, str_word_count(strip_tags($site->description)), $slug.' is thin');
-            $this->get('/'.$slug)->assertOk()->assertSee('<h1><em>'.$name.'</em> Video Downloader</h1>', false)->assertSee('link anatomy');
-        }
-        $this->assertTrue(SupportedSite::active()->where('slug', 'threads-downloader')->first()->domainList()->contains('threads.com'));
-        $this->get('/supported-sites')->assertOk()->assertSee('/threads-downloader')->assertSee('/pinterest-downloader');
+        $site = SupportedSite::active()->where('slug', 'threads-downloader')->first();
+        $this->assertNotNull($site);
+        $this->assertGreaterThan(850, str_word_count(strip_tags($site->description)));
+        $this->assertTrue($site->domainList()->contains('threads.com'));
+        $this->get('/threads-downloader')->assertOk()->assertSee('<h1><em>Threads</em> Video Downloader</h1>', false)->assertSee('Threads link anatomy');
+        $this->get('/supported-sites')->assertOk()->assertSee('/threads-downloader')->assertDontSee('/pinterest-downloader');
         $this->get('/')->assertSee('/threads-downloader');
-        $this->get('/sitemap.xml')->assertSee('/pinterest-downloader</loc>', false)->assertSee('/threads-downloader</loc>', false);
+        $this->get('/sitemap.xml')->assertSee('/threads-downloader</loc>', false)->assertDontSee('/pinterest-downloader</loc>', false);
+
+        // Pinterest content is ready but the provider cannot prepare Pin downloads yet.
+        $pinterest = SupportedSite::where('slug', 'pinterest-downloader')->first();
+        $this->assertFalse($pinterest->is_active);
+        $this->assertGreaterThan(850, str_word_count(strip_tags($pinterest->description)));
+        $this->get('/pinterest-downloader')->assertNotFound();
         $this->assertNull(SupportedSite::active()->where('slug', 'reddit-downloader')->first());
     }
 
