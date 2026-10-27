@@ -246,6 +246,21 @@ class SeoPagesTest extends TestCase
         }
     }
 
+    public function test_pinterest_and_threads_platform_pages_are_live()
+    {
+        foreach (['pinterest-downloader' => 'Pinterest', 'threads-downloader' => 'Threads'] as $slug => $name) {
+            $site = SupportedSite::active()->where('slug', $slug)->first();
+            $this->assertNotNull($site, $slug);
+            $this->assertGreaterThan(850, str_word_count(strip_tags($site->description)), $slug.' is thin');
+            $this->get('/'.$slug)->assertOk()->assertSee('<h1><em>'.$name.'</em> Video Downloader</h1>', false)->assertSee('link anatomy');
+        }
+        $this->assertTrue(SupportedSite::active()->where('slug', 'threads-downloader')->first()->domainList()->contains('threads.com'));
+        $this->get('/supported-sites')->assertOk()->assertSee('/threads-downloader')->assertSee('/pinterest-downloader');
+        $this->get('/')->assertSee('/threads-downloader');
+        $this->get('/sitemap.xml')->assertSee('/pinterest-downloader</loc>', false)->assertSee('/threads-downloader</loc>', false);
+        $this->assertNull(SupportedSite::active()->where('slug', 'reddit-downloader')->first());
+    }
+
     public function test_homepage_declares_web_application_schema()
     {
         $this->get('/')->assertSee('"@type":"WebApplication"', false);

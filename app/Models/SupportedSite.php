@@ -28,6 +28,7 @@ class SupportedSite extends Model
         'dailymotion-downloader' => '[Dailymotion] Video Downloader',
         'twitch-downloader' => '[Twitch] Clip Downloader',
         'pinterest-downloader' => '[Pinterest] Video Downloader',
+        'threads-downloader' => '[Threads] Video Downloader',
     ];
 
     /**
@@ -53,6 +54,7 @@ class SupportedSite extends Model
         'dailymotion-downloader' => ['dailymotion'],
         'twitch-downloader' => ['twitch'],
         'pinterest-downloader' => ['pinterest'],
+        'threads-downloader' => ['threads'],
     ];
 
     /**
@@ -67,7 +69,8 @@ class SupportedSite extends Model
         'vimeo-downloader' => 'Public and unlisted vimeo.com links. Explains every Vimeo privacy level and the creator download button.',
         'dailymotion-downloader' => 'dailymotion.com/video and dai.ly links. SD to 1080p when uploaded; regional and age limits respected.',
         'twitch-downloader' => 'clips.twitch.tv and channel clip links, plus public VODs before they expire. Live streams excluded.',
-        'pinterest-downloader' => 'Video Pins from pinterest.com/pin and pin.it links.',
+        'pinterest-downloader' => 'Video Pins from pinterest.com/pin and pin.it links. 720p MP4 plus the cover image; image Pins return the picture only.',
+        'threads-downloader' => 'Public threads.net and threads.com post links. One 720p MP4 per video; replies and quotes need their own post link.',
     ];
 
     /**
@@ -83,6 +86,7 @@ class SupportedSite extends Model
         'dailymotion-downloader' => ['video' => 'MP4', 'audio' => '—', 'short' => '—', 'links' => 'dailymotion.com/video, dai.ly'],
         'twitch-downloader' => ['video' => 'MP4 clips / VODs', 'audio' => '—', 'short' => 'Clips', 'links' => 'clips.twitch.tv, twitch.tv/videos'],
         'pinterest-downloader' => ['video' => 'MP4', 'audio' => '—', 'short' => '—', 'links' => 'pinterest.com/pin, pin.it'],
+        'threads-downloader' => ['video' => 'MP4', 'audio' => '—', 'short' => '—', 'links' => 'threads.net/@user/post, threads.com'],
     ];
 
     public function scopeActive(Builder $query)
@@ -174,6 +178,7 @@ class SupportedSite extends Model
             'dailymotion-downloader' => 'bi-play-circle-fill',
             'twitch-downloader' => 'bi-twitch',
             'pinterest-downloader' => 'bi-pinterest',
+            'threads-downloader' => 'bi-threads',
         ];
 
         return isset($icons[$this->slug]) ? $icons[$this->slug] : null;
@@ -191,6 +196,7 @@ class SupportedSite extends Model
             'dailymotion-downloader' => '#0b73e0',
             'twitch-downloader' => '#9146ff',
             'pinterest-downloader' => '#bd081c',
+            'threads-downloader' => '#111111',
         ];
 
         return isset($colors[$this->slug]) ? $colors[$this->slug] : '#2166f3';
