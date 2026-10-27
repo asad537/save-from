@@ -151,6 +151,28 @@ class SeoPagesTest extends TestCase
         $this->get('/index.php?utm_source=x')->assertStatus(301)->assertHeader('Location', 'http://localhost/?utm_source=x');
     }
 
+    public function test_uk_keyword_guides_render_with_a_matching_tool_cta()
+    {
+        $expected = [
+            'instagram-story-downloader-story-saver-public-stories-guide' => '/instagram-stories-downloader',
+            'mp4-to-mp3-converter-or-audio-download-guide' => '#downloader',
+            'download-tiktok-videos-without-watermark-public-link-guide' => '/tiktok-downloader',
+            'youtube-4k-video-download-mp4-2160p-quality-guide' => '/youtube-to-mp4',
+            'download-youtube-clips-clip-link-vs-watch-link-guide' => '/youtube-downloader',
+        ];
+        foreach ($expected as $slug => $cta) {
+            $post = BlogPost::published()->where('slug', $slug)->first();
+            $this->assertNotNull($post, $slug);
+            $this->assertGreaterThan(800, str_word_count(strip_tags($post->content)), $slug.' is thin');
+            $this->get('/blog/'.$slug)->assertOk()
+                ->assertSee('<h1>'.e($post->title).'</h1>', false)
+                ->assertSee('"@type":"BlogPosting"', false)
+                ->assertSee($cta.'"><i class="bi bi-download"></i>', false);
+            $this->assertFileExists(public_path($post->featured_image));
+        }
+        $this->get('/sitemap.xml')->assertSee('/blog/download-youtube-clips-clip-link-vs-watch-link-guide</loc>', false);
+    }
+
     public function test_homepage_declares_web_application_schema()
     {
         $this->get('/')->assertSee('"@type":"WebApplication"', false);
