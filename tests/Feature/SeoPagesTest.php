@@ -187,6 +187,24 @@ class SeoPagesTest extends TestCase
         $this->get('/blog/'.$savefrom->slug)->assertOk()->assertSee('How to tell a safe downloader from a risky one')->assertSee('<title>SaveFrom Search: What People Want and How to Get It Safely</title>', false);
     }
 
+    public function test_homepage_targets_video_downloader_and_lists_english_guides_only()
+    {
+        $response = $this->get('/');
+        $response->assertOk()
+            ->assertSee('<title>Video Downloader Online – Free MP4 &amp; MP3 | Save-Froms</title>', false)
+            ->assertSee('Which video downloader page should you use?')
+            ->assertSee('/twitch-downloader')
+            ->assertSee('/instagram-stories-downloader')
+            ->assertDontSee('watch?v=abc123')
+            ->assertSee('Video download guides');
+
+        $arabic = BlogPost::published()->where('language', 'ar')->first();
+        if ($arabic) {
+            $response->assertDontSee(e($arabic->title), false);
+        }
+        $this->assertGreaterThan(850, str_word_count(strip_tags(\App\Models\HomepageContent::first()->content)));
+    }
+
     public function test_homepage_declares_web_application_schema()
     {
         $this->get('/')->assertSee('"@type":"WebApplication"', false);
