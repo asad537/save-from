@@ -221,6 +221,31 @@ class SeoPagesTest extends TestCase
         $this->get('/tiktok-downloader')->assertOk()->assertSee('Photo-mode posts and slideshows');
     }
 
+    public function test_october_six_posts_are_merged_and_twitch_x_expanded()
+    {
+        $merges = [
+            'dailymotion-video-url-guide-short-links-quality' => 'dailymotion-video-downloader-public-links-quality-guide',
+            'vimeo-download-guide-public-links-privacy-quality' => 'download-vimeo-videos-public-links-passwords-privacy-guide',
+            'tiktok-link-guide-mp4-mp3-short-urls' => 'tiktok-mp4-vs-mp3-download-format-guide',
+            'instagram-reels-posts-stories-public-link-guide' => 'instagram-reels-download-quality-links-mobile-tips',
+        ];
+        foreach ($merges as $old => $new) {
+            $this->get('/blog/'.$old)->assertRedirect('/blog/'.$new);
+            $target = BlogPost::published()->where('slug', $new)->first();
+            $this->assertNotNull($target, $new);
+            $this->assertGreaterThan(850, str_word_count(strip_tags($target->content)), $new.' is thin');
+            $this->assertStringNotContainsString('/blog/'.$old, $target->content);
+            $this->get('/blog/'.$new)->assertOk();
+        }
+        $this->get('/sitemap.xml')->assertDontSee('dailymotion-video-url-guide-short-links-quality');
+
+        foreach (['twitch-clips-vods-live-streams-public-link-guide', 'save-video-public-x-post-correct-url'] as $slug) {
+            $post = BlogPost::published()->where('slug', $slug)->first();
+            $this->assertGreaterThan(850, str_word_count(strip_tags($post->content)), $slug.' is thin');
+            $this->get('/blog/'.$slug)->assertOk()->assertSee('URL anatomy');
+        }
+    }
+
     public function test_homepage_declares_web_application_schema()
     {
         $this->get('/')->assertSee('"@type":"WebApplication"', false);

@@ -34,6 +34,11 @@ class BlogController extends Controller
             'download-video-yt-mobile-india-guide' => 'download-video-yt-mobile-guide',
             // Merged into the Facebook Reel downloader guide on 2026-10-27.
             'download-facebook-reels-android-iphone-files-guide' => 'facebook-reel-downloader-public-reels-mobile-guide',
+            // 6 October short posts merged into their longer siblings on 2026-10-27.
+            'dailymotion-video-url-guide-short-links-quality' => 'dailymotion-video-downloader-public-links-quality-guide',
+            'vimeo-download-guide-public-links-privacy-quality' => 'download-vimeo-videos-public-links-passwords-privacy-guide',
+            'tiktok-link-guide-mp4-mp3-short-urls' => 'tiktok-mp4-vs-mp3-download-format-guide',
+            'instagram-reels-posts-stories-public-link-guide' => 'instagram-reels-download-quality-links-mobile-tips',
         ];
         if (isset($legacySlugs[$slug])) {
             return redirect()->route('blog.show', $legacySlugs[$slug], 301);
