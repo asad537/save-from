@@ -79,7 +79,7 @@ class GuideTopics
             'name' => 'Hindi / Hinglish',
             'h1' => 'Hindi Mein Video Download Guides',
             'title' => 'Hindi Mein Video Download Guides | Save-Froms',
-            'description' => 'Hinglish mein guides: YouTube se video download kaise kare, Instagram se Reels kaise download kare, aur video download karne wala app ki jagah browser ka tareeqa.',
+            'description' => 'Hinglish guides: YouTube se video download kaise kare, Instagram se Reels kaise download kare, aur video download karne wala app ki jagah browser ka tareeqa.',
             'tokens' => [],
             'language' => 'hi-Latn',
             'tool' => 'how-to-download-videos',
