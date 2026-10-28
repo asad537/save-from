@@ -16,8 +16,14 @@
 <section class="landing-results" id="download-results"><div class="wrap"><h2>Choose Your Download Format</h2><div class="landing-result-card"><aside class="landing-result-media">@if($result['thumbnail'])<img src="{{ $result['thumbnail'] }}" alt="{{ $result['title'] }}" title="{{ $result['title'] }}">@endif<h3>{{ $result['title'] }}</h3><span><i class="bi bi-globe2"></i>&nbsp; {{ $result['platform']['name'] }} @if($result['duration']) &nbsp;·&nbsp; <i class="bi bi-clock"></i>&nbsp; {{ $result['duration'] }} @endif</span></aside><div>
 @php($videoFormats = collect($result['formats'])->where('type', 'Video'))
 @php($audioFormats = collect($result['formats'])->where('type', 'Audio'))
+@php($imageFormats = collect($result['formats'])->where('type', 'Image'))
+@if($imageFormats->isNotEmpty())<div class="landing-format-title"><i class="bi bi-image"></i>&nbsp; Photos</div>
+@foreach($imageFormats as $format)<div class="landing-format-row"><span class="landing-format-badge">{{ $format['format'] }}</span><strong>{{ $format['quality'] }}</strong><span class="landing-format-size">{{ $format['size'] }}</span>@if($format['download_url'])<a class="landing-format-download" href="{{ $format['download_url'] }}" rel="nofollow"><i class="bi bi-download"></i>&nbsp; Download</a>@else<span>Unavailable</span>@endif</div>@endforeach
+@endif
+@if($videoFormats->isNotEmpty() || $imageFormats->isEmpty())
 <div class="landing-format-title"><i class="bi bi-camera-video-fill"></i>&nbsp; Video</div>
 @forelse($videoFormats as $format)<div class="landing-format-row"><span class="landing-format-badge">{{ $format['format'] }}</span><strong>{{ $format['quality'] }}</strong><span class="landing-format-size">{{ $format['size'] }}</span>@if($format['download_url'])<a class="landing-format-download" href="{{ $format['download_url'] }}" rel="nofollow"><i class="bi bi-download"></i>&nbsp; Download</a>@elseif($format['prepare_token'])<a class="landing-format-download" href="{{ route('download.prepare', $format['prepare_token']) }}"><i class="bi bi-download"></i>&nbsp; Download</a>@else<span>Unavailable</span>@endif</div>@empty<div style="padding:18px 22px;color:#71849d">No video formats available.</div>@endforelse
+@endif
 @if($audioFormats->isNotEmpty())
 <div class="landing-format-title"><i class="bi bi-music-note-beamed"></i>&nbsp; Audio</div>
 @foreach($audioFormats as $format)

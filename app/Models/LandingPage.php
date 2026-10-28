@@ -66,6 +66,7 @@ class LandingPage extends Model
         'youtube-mp3-downloader' => [['youtube', 'audio', 'mp3'], ['mp3', 'audio']],
         'instagram-reels-downloader' => [['instagram', 'ig'], ['reels', 'reel', 'mp4']],
         'instagram-stories-downloader' => [['instagram'], ['story', 'stories']],
+        'instagram-photo-downloader' => [['instagram', 'ig'], ['photo', 'photos', 'pics', 'images', 'image']],
         'tiktok-mp3-downloader' => [['tiktok'], ['mp3', 'audio']],
         'tiktok-mp4-downloader' => [['tiktok'], ['mp4', 'watermark', 'videos']],
         'facebook-reels-downloader' => [['facebook'], ['reel', 'reels']],

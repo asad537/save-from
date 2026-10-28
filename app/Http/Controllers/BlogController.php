@@ -122,6 +122,7 @@ class BlogController extends Controller
             'youtube-to-mp4' => [['youtube', 'mp4']],
             'instagram-reels-downloader' => [['instagram', 'reels']],
             'instagram-stories-downloader' => [['instagram', 'stories']],
+            'instagram-photo-downloader' => [['instagram', 'photo'], ['instagram', 'photos']],
             'tiktok-mp3-downloader' => [['tiktok', 'mp3']],
             'tiktok-mp4-downloader' => [['tiktok', 'mp4']],
             'download-troubleshooting' => [['working'], ['403'], ['fixes']],

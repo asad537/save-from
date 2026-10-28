@@ -60,6 +60,7 @@ class DownloaderController extends Controller
             })->map(function ($resource) use ($match, $mediaTitle) {
                 $type = strtolower((string) ($resource['type'] ?? 'video'));
                 $audio = Str::contains($type, ['audio', 'music', 'mp3']);
+                $image = Str::contains($type, ['picture', 'image', 'photo']);
                 $bytes = (int) ($resource['size'] ?? $resource['filesize'] ?? 0);
                 $downloadUrl = $resource['download_url'] ?? $resource['downloadUrl'] ?? $resource['download'] ?? $resource['url'] ?? $resource['link'] ?? null;
                 $actualFormat = strtoupper((string) ($resource['original_format'] ?? $resource['format'] ?? $resource['ext'] ?? ($audio ? 'MP3' : 'MP4')));
@@ -76,7 +77,7 @@ class DownloaderController extends Controller
                 $meta = [
                     'platform' => $match['name'],
                     'title' => $mediaTitle,
-                    'format' => $audio ? 'MP3' : ($actualFormat ?: 'MP4'),
+                    'format' => $audio ? 'MP3' : ($actualFormat ?: ($image ? 'JPG' : 'MP4')),
                     'quality' => $quality,
                 ];
                 if ($downloadUrl) {
@@ -89,9 +90,9 @@ class DownloaderController extends Controller
                     Cache::put('vidssave_prepare:'.$prepareToken, ['resource' => $resource['resource_content'], 'meta' => $meta], now()->addMinutes(20));
                 }
                 return [
-                    'type' => $audio ? 'Audio' : 'Video',
+                    'type' => $audio ? 'Audio' : ($image ? 'Image' : 'Video'),
                     'quality' => $quality,
-                    'format' => $audio ? 'MP3' : ($actualFormat ?: 'MP4'),
+                    'format' => $audio ? 'MP3' : ($actualFormat ?: ($image ? 'JPG' : 'MP4')),
                     'size' => $bytes >= 1048576 ? number_format($bytes / 1048576, 2).' MB' : ($bytes >= 1024 ? number_format($bytes / 1024, 2).' KB' : ($bytes ? $bytes.' B' : 'Size varies')),
                     'download_url' => $trackedDownloadUrl,
                     'prepare_token' => $prepareToken,

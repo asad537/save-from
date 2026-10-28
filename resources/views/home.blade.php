@@ -29,10 +29,18 @@
             <div class="formats-panel">
                 @php($videoFormats = collect($result['formats'])->where('type', 'Video'))
                 @php($audioFormats = collect($result['formats'])->where('type', 'Audio'))
+                @php($imageFormats = collect($result['formats'])->where('type', 'Image'))
+                @if($imageFormats->isNotEmpty())<div class="format-heading"><i class="bi bi-image"></i>Photos</div>
+                @foreach($imageFormats as $format)
+                    <div class="inline-format-row"><span class="inline-format-badge">{{ $format['format'] }}</span><span class="inline-format-quality">{{ $format['quality'] }}</span><span class="inline-format-size">{{ $format['size'] }}</span>@if($format['download_url'])<a class="inline-download" href="{{ $format['download_url'] }}" target="_blank" rel="nofollow noopener"><i class="bi bi-download"></i>Download</a>@else<span class="inline-download" style="opacity:.45"><i class="bi bi-x-circle"></i>Unavailable</span>@endif</div>
+                @endforeach
+                @endif
+                @if($videoFormats->isNotEmpty() || $imageFormats->isEmpty())
                 <div class="format-heading"><i class="bi bi-camera-video-fill"></i>Video</div>
                 @forelse($videoFormats as $format)
                     <div class="inline-format-row"><span class="inline-format-badge">{{ $format['format'] }}</span><span class="inline-format-quality">{{ $format['quality'] }}</span><span class="inline-format-size">{{ $format['size'] }}</span>@if($format['download_url'])<a class="inline-download" href="{{ $format['download_url'] }}" target="_blank" rel="nofollow noopener"><i class="bi bi-download"></i>Download</a>@elseif($format['prepare_token'])<a class="inline-download" href="{{ route('download.prepare', $format['prepare_token']) }}"><i class="bi bi-download"></i>Download</a>@else<span class="inline-download" style="opacity:.45"><i class="bi bi-x-circle"></i>Unavailable</span>@endif</div>
                 @empty<div class="inline-empty">No video formats are available for this link.</div>@endforelse
+                @endif
                 @if($audioFormats->isNotEmpty())
                     <div class="format-heading audio"><i class="bi bi-music-note-beamed"></i>Music</div>
                     @foreach($audioFormats as $format)

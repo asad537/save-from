@@ -347,6 +347,27 @@ class SeoPagesTest extends TestCase
         $this->assertFileDoesNotExist(public_path('sitemap.xml'));
     }
 
+    public function test_keyword_of_the_day_mp4_guide_and_instagram_photo_page()
+    {
+        $post = BlogPost::published()->where('slug', 'mp4-downloader-save-any-public-video-as-mp4-guide')->first();
+        $this->assertNotNull($post);
+        $this->assertGreaterThan(900, str_word_count(strip_tags($post->content)));
+        $this->get('/blog/'.$post->slug)->assertOk()->assertSee('<h1>'.e($post->title).'</h1>', false)->assertSee('/youtube-to-mp4');
+        $this->assertFileExists(public_path($post->featured_image));
+
+        $page = LandingPage::active()->where('slug', 'instagram-photo-downloader')->first();
+        $this->assertNotNull($page);
+        $this->assertGreaterThan(850, str_word_count(strip_tags($page->content)));
+        $this->assertCount(6, $page->faq_items);
+        $this->get('/instagram-photo-downloader')->assertOk()->assertSee('<h1><em>Instagram Photo</em> Downloader</h1>', false)->assertSee('/instagram-downloader');
+        $this->get('/instagram-downloader')->assertOk()->assertSee('/instagram-photo-downloader');
+        $this->get('/sitemap.xml')->assertSee('/instagram-photo-downloader</loc>', false);
+        $this->assertStringContainsString('.bi-image{', file_get_contents(public_path('css/icons.css')));
+
+        $this->withSession(['download_result' => ['url' => 'x', 'platform' => ['name' => 'Instagram', 'slug' => 'instagram-downloader'], 'formats' => [['type' => 'Image', 'quality' => '1 - 1440X960', 'format' => 'JPG', 'size' => 'Size varies', 'download_url' => 'https://save-froms.net/download-file/abc', 'prepare_token' => null]], 'title' => 'Photo post', 'thumbnail' => null, 'duration' => '']])
+            ->get('/instagram-photo-downloader')->assertOk()->assertSee('Photos')->assertSee('1 - 1440X960')->assertDontSee('No video formats available');
+    }
+
     public function test_homepage_declares_web_application_schema()
     {
         $this->get('/')->assertSee('"@type":"WebApplication"', false);
