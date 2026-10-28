@@ -368,6 +368,23 @@ class SeoPagesTest extends TestCase
             ->get('/instagram-photo-downloader')->assertOk()->assertSee('Photos')->assertSee('1 - 1440X960')->assertDontSee('No video formats available');
     }
 
+    public function test_three_more_keyword_guides_are_published()
+    {
+        $expected = [
+            'dl-instagram-videos-photos-reels-stories-link-cheat-sheet' => '/instagram-photo-downloader',
+            'free-youtube-download-no-install-no-signup-guide' => '/youtube-downloader',
+            'youtube-downloader-app-vs-browser-android-guide' => '/youtube-downloader',
+        ];
+        foreach ($expected as $slug => $link) {
+            $post = BlogPost::published()->where('slug', $slug)->first();
+            $this->assertNotNull($post, $slug);
+            $this->assertGreaterThan(900, str_word_count(strip_tags($post->content)), $slug.' is thin');
+            $this->assertLessThanOrEqual(160, mb_strlen($post->meta_description));
+            $this->get('/blog/'.$slug)->assertOk()->assertSee('<h1>'.e($post->title).'</h1>', false)->assertSee($link)->assertSee('"@type":"BlogPosting"', false);
+            $this->assertFileExists(public_path($post->featured_image));
+        }
+    }
+
     public function test_homepage_declares_web_application_schema()
     {
         $this->get('/')->assertSee('"@type":"WebApplication"', false);
