@@ -55,7 +55,17 @@ Route::get('/download-file/{token}', function (Request $request, string $token) 
 
     $url = $download['url'];
     $host = strtolower((string) parse_url($url, PHP_URL_HOST));
-    if (parse_url($url, PHP_URL_SCHEME) !== 'https' || !($host === 'vidssave.com' || Str::endsWith($host, '.vidssave.com'))) {
+    $meta = $download['meta'] ?? [];
+    $isImage = in_array(strtoupper((string) ($meta['format'] ?? '')), ['JPG', 'JPEG', 'PNG', 'WEBP'], true);
+    // Video goes through the provider's proxy; photos are served straight from the platform CDN.
+    $allowedHosts = $isImage ? ['vidssave.com', 'cdninstagram.com', 'fbcdn.net'] : ['vidssave.com'];
+    $hostAllowed = false;
+    foreach ($allowedHosts as $allowed) {
+        if ($host === $allowed || Str::endsWith($host, '.'.$allowed)) {
+            $hostAllowed = true;
+        }
+    }
+    if (parse_url($url, PHP_URL_SCHEME) !== 'https' || !$hostAllowed) {
         Log::warning('Blocked an unexpected media download host', ['host' => $host]);
         return response()->view('download-error', ['message' => 'The media provider returned an invalid download address. Please analyze the link again.'], 502);
     }
@@ -96,6 +106,14 @@ Route::get('/download-file/{token}', function (Request $request, string $token) 
             }
             $responseHeaders[$header] = $value;
         }
+    }
+    if (empty($responseHeaders['Content-Disposition'])) {
+        // Platform CDNs send no disposition; name the file so the browser saves it instead of opening it.
+        $extension = $isImage ? strtolower((string) ($meta['format'] ?? 'jpg')) : 'mp4';
+        $extension = $extension === 'jpeg' ? 'jpg' : $extension;
+        $name = Str::slug(Str::limit((string) ($meta['title'] ?? 'save-froms'), 60, ''), '-') ?: 'save-froms';
+        $suffix = preg_replace('/[^0-9]/', '', (string) ($meta['quality'] ?? ''));
+        $responseHeaders['Content-Disposition'] = 'attachment; filename="'.$name.($isImage && $suffix !== '' ? '-'.substr($suffix, 0, 2) : '').'.'.$extension.'"';
     }
     $responseHeaders['Cache-Control'] = 'private, no-store, max-age=0';
     $responseHeaders['X-Content-Type-Options'] = 'nosniff';
