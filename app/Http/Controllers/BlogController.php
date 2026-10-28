@@ -125,6 +125,7 @@ class BlogController extends Controller
             'instagram-photo-downloader' => [['instagram', 'photo'], ['instagram', 'photos']],
             'tiktok-mp3-downloader' => [['tiktok', 'mp3']],
             'tiktok-mp4-downloader' => [['tiktok', 'mp4']],
+            'tiktok-hd-downloader' => [['tiktok', 'hd']],
             'download-troubleshooting' => [['working'], ['403'], ['fixes']],
         ];
         foreach ($landingRules as $slug => $patterns) {

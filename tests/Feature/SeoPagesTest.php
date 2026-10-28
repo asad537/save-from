@@ -385,6 +385,21 @@ class SeoPagesTest extends TestCase
         }
     }
 
+    public function test_tiktok_hd_downloader_page_is_live_and_linked()
+    {
+        $page = LandingPage::active()->where('slug', 'tiktok-hd-downloader')->first();
+        $this->assertNotNull($page);
+        $this->assertGreaterThan(850, str_word_count(strip_tags($page->content)));
+        $this->assertCount(6, $page->faq_items);
+        $this->assertLessThanOrEqual(62, mb_strlen($page->meta_title));
+        $this->assertLessThanOrEqual(160, mb_strlen($page->meta_description));
+        $this->get('/tiktok-hd-downloader')->assertOk()->assertSee('<h1><em>TikTok HD</em> Downloader</h1>', false)->assertSee('/tiktok-downloader')->assertSee('/blog/download-tiktok-videos-without-watermark-public-link-guide');
+        $this->get('/tiktok-downloader')->assertOk()->assertSee('/tiktok-hd-downloader');
+        $this->get('/tiktok-mp4-downloader')->assertOk()->assertSee('/tiktok-hd-downloader');
+        $this->get('/blog/download-tiktok-videos-without-watermark-public-link-guide')->assertOk()->assertSee('/tiktok-hd-downloader');
+        $this->get('/sitemap.xml')->assertSee('/tiktok-hd-downloader</loc>', false);
+    }
+
     public function test_homepage_declares_web_application_schema()
     {
         $this->get('/')->assertSee('"@type":"WebApplication"', false);

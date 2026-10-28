@@ -37,7 +37,7 @@ class SupportedSite extends Model
     const CHILD_PAGES = [
         'youtube-downloader' => ['youtube-shorts-downloader', 'youtube-to-mp4', 'youtube-mp3-downloader'],
         'instagram-downloader' => ['instagram-reels-downloader', 'instagram-stories-downloader', 'instagram-photo-downloader'],
-        'tiktok-downloader' => ['tiktok-mp4-downloader', 'tiktok-mp3-downloader'],
+        'tiktok-downloader' => ['tiktok-mp4-downloader', 'tiktok-hd-downloader', 'tiktok-mp3-downloader'],
         'facebook-downloader' => ['facebook-reels-downloader'],
     ];
 
