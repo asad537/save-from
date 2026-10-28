@@ -75,6 +75,16 @@ class GuideTopics
             'tool' => 'download-troubleshooting',
             'intro' => '<p>Almost every failed download has one of five causes: the link points to a collection, the post is not public, the result expired, the platform changed something, or the browser blocked the file. These guides show how to tell them apart in under a minute, and what the messages on this site mean. The safety guides cover what people searching for "savefrom" and similar names should avoid: installs, logins and fake download buttons.</p><p>The <a href="/download-troubleshooting">download troubleshooting page</a> has the full error table; the guides below go deeper on each case.</p>',
         ],
+        'hindi' => [
+            'name' => 'Hindi / Hinglish',
+            'h1' => 'Hindi Mein Video Download Guides',
+            'title' => 'Hindi Mein Video Download Guides | Save-Froms',
+            'description' => 'Hinglish mein guides: YouTube se video download kaise kare, Instagram se Reels kaise download kare, aur video download karne wala app ki jagah browser ka tareeqa.',
+            'tokens' => [],
+            'language' => 'hi-Latn',
+            'tool' => 'how-to-download-videos',
+            'intro' => '<p>Yeh guides un sawalon ke jawab hain jo India mein log Google par roz type karte hain: YouTube se video download kaise kare, Instagram se Reels kaise download kare, aur kaunsa video download karne wala app sahi hai. Jawab har jagah ek hi hai: app ki zaroorat nahi, Chrome ya Safari mein link paste karo aur file save ho jati hai. Har guide Android, iPhone aur computer ke steps alag alag deta hai, aur errors ke hal bhi.</p><p>Angrezi guides <a href="/blog">blog</a> par hain; tool pages, jaise <a href="/youtube-downloader">YouTube downloader</a>, sab ke liye ek jaise kaam karte hain.</p>',
+        ],
     ];
 
     public static function all(): array
@@ -94,9 +104,9 @@ class GuideTopics
             return collect();
         }
 
-        return BlogPost::published()->where('language', 'en')->latest('published_at')->latest('id')->get()
+        return BlogPost::published()->where('language', $topic['language'] ?? 'en')->latest('published_at')->latest('id')->get()
             ->filter(function ($post) use ($topic) {
-                return (bool) array_intersect($topic['tokens'], explode('-', $post->slug));
+                return !$topic['tokens'] || array_intersect($topic['tokens'], explode('-', $post->slug));
             })->values();
     }
 }

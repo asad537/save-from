@@ -400,6 +400,25 @@ class SeoPagesTest extends TestCase
         $this->get('/sitemap.xml')->assertSee('/tiktok-hd-downloader</loc>', false);
     }
 
+    public function test_hinglish_and_url_guides_are_published_with_language_signals()
+    {
+        foreach (['youtube-se-video-download-kaise-kare' => '/youtube-downloader', 'instagram-se-reels-download-kaise-kare' => '/instagram-reels-downloader', 'video-download-karne-wala-app-ya-online' => '#downloader'] as $slug => $cta) {
+            $post = BlogPost::published()->where('slug', $slug)->first();
+            $this->assertNotNull($post, $slug);
+            $this->assertSame('hi-Latn', $post->language);
+            $this->assertGreaterThan(850, str_word_count(strip_tags($post->content)), $slug.' is thin');
+            $this->get('/blog/'.$slug)->assertOk()->assertSee('<html lang="hi-Latn" dir="ltr">', false)->assertSee('content="hi_IN"', false)->assertSee($cta);
+            $this->assertFileExists(public_path($post->featured_image));
+        }
+        $this->get('/')->assertDontSee('kaise-kare');
+        $this->get('/guides/hindi')->assertOk()->assertSee('/blog/youtube-se-video-download-kaise-kare')->assertSee('/blog/video-download-karne-wala-app-ya-online');
+        $this->get('/guides/youtube')->assertDontSee('kaise-kare');
+
+        $url = BlogPost::published()->where('slug', 'download-video-from-url-link-which-links-work-guide')->first();
+        $this->assertGreaterThan(900, str_word_count(strip_tags($url->content)));
+        $this->get('/blog/'.$url->slug)->assertOk()->assertSee('/blog/download-video-web-page-find-public-source-link-guide');
+    }
+
     public function test_homepage_declares_web_application_schema()
     {
         $this->get('/')->assertSee('"@type":"WebApplication"', false);
