@@ -22,7 +22,13 @@ class DownloaderController extends Controller
                 return $host === $domain || Str::endsWith($host, '.'.$domain);
             });
         });
-        if (!$site) return back()->withInput()->withErrors(['url' => 'This platform is not supported or is currently disabled.']);
+        if (!$site) {
+            $siteError = 'This platform is not supported or is currently disabled.';
+            if ($request->ajax() || $request->wantsJson()) {
+                return response()->json(['ok' => false, 'error' => $siteError], 422);
+            }
+            return back()->withInput()->withErrors(['url' => $siteError]);
+        }
         $match = ['name' => $site->name, 'slug' => $site->slug];
         try {
             $response = Http::asJson()->timeout(25)->retry(1, 500)->post(config('services.vidssave.plugin_endpoint'), [
@@ -102,7 +108,25 @@ class DownloaderController extends Controller
             if (!$formats) throw new \RuntimeException('No downloadable formats found.');
         } catch (\Throwable $exception) {
             report($exception);
-            return back()->withInput()->withErrors(['url' => 'The media provider could not process this link right now. Please try again.']);
+            $providerError = 'The media provider could not process this link right now. Please try again.';
+            if ($request->ajax() || $request->wantsJson()) {
+                return response()->json(['ok' => false, 'error' => $providerError], 422);
+            }
+            return back()->withInput()->withErrors(['url' => $providerError]);
+        }
+
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json([
+                'ok' => true,
+                'title' => $mediaTitle,
+                'thumbnail' => $data['thumbnail'] ?? null,
+                'platform' => $match,
+                'duration' => $this->formatDuration($data['duration'] ?? 0),
+                'formats' => collect($formats)->map(function ($f) {
+                    $f['prepare_url'] = !empty($f['prepare_token']) ? route('download.prepare', $f['prepare_token']) : null;
+                    return $f;
+                })->all(),
+            ]);
         }
 
         $destination = $returnPage ? url('/'.$returnPage->slug) : route('home');
