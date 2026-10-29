@@ -433,6 +433,20 @@ class SeoPagesTest extends TestCase
         $this->get('/guides/hindi')->assertOk()->assertSee('/blog/facebook-video-download-kaise-kare');
     }
 
+    public function test_three_more_hinglish_guides_are_published()
+    {
+        foreach (['youtube-shorts-download-kaise-kare' => '/youtube-shorts-downloader', 'instagram-se-photo-download-kaise-kare' => '/instagram-photo-downloader', 'video-se-audio-kaise-nikale-mp4-to-mp3' => '/youtube-mp3-downloader'] as $slug => $link) {
+            $post = BlogPost::published()->where('slug', $slug)->first();
+            $this->assertNotNull($post, $slug);
+            $this->assertSame('hi-Latn', $post->language);
+            $this->assertGreaterThan(850, str_word_count(strip_tags($post->content)), $slug.' is thin');
+            $this->assertLessThanOrEqual(160, mb_strlen($post->meta_description));
+            $this->assertLessThanOrEqual(62, mb_strlen($post->meta_title));
+            $this->get('/blog/'.$slug)->assertOk()->assertSee('<html lang="hi-Latn" dir="ltr">', false)->assertSee($link);
+            $this->assertFileExists(public_path($post->featured_image));
+        }
+    }
+
     public function test_homepage_declares_web_application_schema()
     {
         $this->get('/')->assertSee('"@type":"WebApplication"', false);
