@@ -113,6 +113,8 @@ HTML,
 </ul>
 <h2>Sirf ek hissa chahiye?</h2>
 <p>MP3 poori video jitni lambi hoti hai. Ek gaana ya ek chapter kaatne ke liye Android par Lexis Audio Editor jaisa free app, iPhone par Voice Memos mein import kar ke trim, aur computer par Audacity ya FFmpeg: <code>ffmpeg -ss 00:12:00 -to 00:16:30 -i audio.mp3 -c copy part.mp3</code>. File ka naam video ke title se banta hai; music app mein sahi sort ke liye rename kar lo.</p>
+<h2>Data aur storage ka hisaab</h2>
+<p>MP3 video se bees guna chhoti hoti hai: 10 minute ki 720p video 150 se 300 MB, wahi audio 10 MB. Jio ya Airtel ke daily 1.5 GB plan par 128 kbps ki 100 se zyada files aa jati hain, aur 64 GB ke phone mein hazaron. Agar sirf sunna hai, video download kar ke phone bharne ka koi faida nahi; seedha Audio row chuno. Purane phone par bhi yeh tareeqa halka hai, kyunki browser ko sirf chhoti file save karni hoti hai.</p>
 <h2>MP3 nahi mil raha? Yeh check karo</h2>
 <table><thead><tr><th>Masla</th><th>Wajah</th><th>Hal</th></tr></thead><tbody>
 <tr><td>Audio section hi nahi</td><td>Live video abhi process ho rahi hai, ya link video ka nahi</td><td>Thori der baad dobara, ya sahi video link copy karo</td></tr>
