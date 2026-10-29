@@ -447,6 +447,25 @@ class SeoPagesTest extends TestCase
         }
     }
 
+    public function test_arabic_gulf_guides_are_published_and_old_arabic_posts_expanded()
+    {
+        $count = function ($html) { return count(preg_split('/\s+/u', trim(strip_tags($html)))); };
+        foreach (['ar-download-video-from-any-site-without-software', 'ar-instagram-photo-download-hd-link', 'ar-twitter-x-video-download-without-software', 'ar-instagram-reels-download-without-software', 'ar-youtube-to-mp3-audio-download'] as $slug) {
+            $post = BlogPost::published()->where('slug', $slug)->first();
+            $this->assertNotNull($post, $slug);
+            $this->assertSame('ar', $post->language);
+            $this->assertGreaterThan(600, $count($post->content), $slug.' is thin');
+            $this->get('/blog/'.$slug)->assertOk()->assertSee('<html lang="ar" dir="rtl">', false)->assertSee('"@type":"BlogPosting"', false);
+            $this->assertFileExists(public_path($post->featured_image));
+        }
+        foreach (['ar-instagram-video-download-public-link-guide', 'ar-youtube-video-download-mp4-quality-guide', 'ar-facebook-video-download-public-fb-watch-guide', 'ar-tiktok-video-download-short-link-mp4-audio-guide'] as $slug) {
+            $post = BlogPost::published()->where('slug', $slug)->first();
+            $this->assertGreaterThan(500, $count($post->content), $slug.' still thin');
+        }
+        $this->get('/guides/arabic')->assertOk()->assertSee('/blog/ar-download-video-from-any-site-without-software')->assertDontSee('kaise-kare');
+        $this->get('/guides/hindi')->assertDontSee('/blog/ar-');
+    }
+
     public function test_homepage_declares_web_application_schema()
     {
         $this->get('/')->assertSee('"@type":"WebApplication"', false);

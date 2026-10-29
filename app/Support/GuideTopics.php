@@ -75,6 +75,16 @@ class GuideTopics
             'tool' => 'download-troubleshooting',
             'intro' => '<p>Almost every failed download has one of five causes: the link points to a collection, the post is not public, the result expired, the platform changed something, or the browser blocked the file. These guides show how to tell them apart in under a minute, and what the messages on this site mean. The safety guides cover what people searching for "savefrom" and similar names should avoid: installs, logins and fake download buttons.</p><p>The <a href="/download-troubleshooting">download troubleshooting page</a> has the full error table; the guides below go deeper on each case.</p>',
         ],
+        'arabic' => [
+            'name' => 'العربية',
+            'h1' => 'أدلة تحميل الفيديو بالعربية',
+            'title' => 'أدلة تحميل الفيديو بالعربية | Save-Froms',
+            'description' => 'أدلة عربية لتحميل الفيديو من يوتيوب وانستقرام وتيك توك وفيسبوك وتويتر بدون برامج، وتحميل صور انستقرام، وتحويل يوتيوب إلى MP3.',
+            'tokens' => [],
+            'language' => 'ar',
+            'tool' => 'how-to-download-videos',
+            'intro' => '<p dir="rtl" lang="ar">هذه الأدلة تجيب عن أكثر ما يبحث عنه المستخدمون في الإمارات والسعودية: تحميل فيديو من أي موقع بدون برامج، تحميل صور وريلز انستقرام، تحميل فيديو تويتر بجودة عالية، وتحويل يوتيوب إلى MP3. الجواب واحد في كل مرة: لا حاجة لتطبيق، انسخ الرابط والصقه في المتصفح، ويُحفظ الملف. كل دليل يشرح الخطوات على الجوال والآيفون والكمبيوتر، ويحدد بصدق ما لا يمكن تحميله ولماذا.</p><p dir="rtl" lang="ar">أدوات التحميل نفسها، مثل <a href="/youtube-downloader">أداة يوتيوب</a>، تعمل بالطريقة نفسها لجميع اللغات.</p>',
+        ],
         'hindi' => [
             'name' => 'Hindi / Hinglish',
             'h1' => 'Hindi Mein Video Download Guides',
