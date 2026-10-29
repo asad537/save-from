@@ -419,6 +419,20 @@ class SeoPagesTest extends TestCase
         $this->get('/blog/'.$url->slug)->assertOk()->assertSee('/blog/download-video-web-page-find-public-source-link-guide');
     }
 
+    public function test_two_more_hinglish_guides_are_published()
+    {
+        foreach (['facebook-video-download-kaise-kare' => '/facebook-downloader', 'youtube-se-mp3-kaise-download-kare' => '/youtube-mp3-downloader'] as $slug => $cta) {
+            $post = BlogPost::published()->where('slug', $slug)->first();
+            $this->assertNotNull($post, $slug);
+            $this->assertSame('hi-Latn', $post->language);
+            $this->assertGreaterThan(850, str_word_count(strip_tags($post->content)), $slug.' is thin');
+            $this->assertLessThanOrEqual(160, mb_strlen($post->meta_description));
+            $this->get('/blog/'.$slug)->assertOk()->assertSee('<html lang="hi-Latn" dir="ltr">', false)->assertSee($cta);
+            $this->assertFileExists(public_path($post->featured_image));
+        }
+        $this->get('/guides/hindi')->assertOk()->assertSee('/blog/facebook-video-download-kaise-kare');
+    }
+
     public function test_homepage_declares_web_application_schema()
     {
         $this->get('/')->assertSee('"@type":"WebApplication"', false);
