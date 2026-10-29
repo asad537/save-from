@@ -15,7 +15,6 @@
 <div class="hero-visual" aria-hidden="true"><div class="demo-label">How a result looks</div><div class="url-chip"><i class="bi bi-link-45deg"></i>Your public video link</div><div class="curve-arrow">↘</div><div class="video-mock"><div class="video-play"><i class="bi bi-play-fill"></i></div><div class="video-timeline"></div><div class="video-controls"><i class="bi bi-play-fill"></i><i class="bi bi-volume-up-fill"></i><span>MP4 · MP3</span><i class="bi bi-gear-fill push"></i><i class="bi bi-arrows-fullscreen"></i></div></div><div class="format-card"><strong>Formats you may see</strong><div class="selected"><i class="bi bi-record-circle-fill"></i> MP4 1080p (Full HD)</div><div><i class="bi bi-circle"></i> MP4 720p (HD)</div><div><i class="bi bi-circle"></i> MP4 480p</div><div><i class="bi bi-circle"></i> MP4 360p</div><div><i class="bi bi-circle"></i> MP4 240p</div><div><i class="bi bi-circle"></i> MP3 (Audio Only)</div></div></div>
 </div></section>
 
-<div id="sf-ajax-result" class="sf-ajax-result"></div>
 @if(session('download_result'))
 @php($result = session('download_result'))
 <section class="inline-result-section" id="download-results">
@@ -84,61 +83,7 @@
 @media(max-width:900px){.home-post-card,.home-post-card.is-featured{display:flex}.home-post-card .home-post-media,.home-post-card.is-featured .home-post-media{min-height:220px;border-right:0}}
 @media(max-width:620px){.home-post-card,.home-post-card.is-featured{display:grid;grid-template-columns:112px minmax(0,1fr);min-height:166px}.home-post-card .home-post-media,.home-post-card.is-featured .home-post-media{min-height:166px;border-right:1px solid #e4edf8}.home-post-card .home-post-body,.home-post-card.is-featured .home-post-body{padding:16px}.home-post-card h3,.home-post-card.is-featured h3{font-size:16px}.home-post-card p,.home-post-card.is-featured p{display:none}}
 </style>
-<style>.sf-ajax-result:empty{display:none}.sf-spinner{display:inline-block;width:14px;height:14px;border:2px solid #cbd9ee;border-top-color:#2166f3;border-radius:50%;animation:sfspin .7s linear infinite;vertical-align:-2px}@keyframes sfspin{to{transform:rotate(360deg)}}</style>
-<script>
-(function(){
-  var form=document.querySelector('.figma-search-wrap form.search')||document.querySelector('form.search');
-  if(!form)return;
-  var input=form.querySelector('input[name="url"]');
-  var token=(form.querySelector('input[name="_token"]')||{}).value||'';
-  var box=document.getElementById('sf-ajax-result');
-  if(!input||!box)return;
-  var busy=false,lastUrl='';
-  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-  function isUrl(v){v=(v||'').trim();if(!/^https?:\/\//i.test(v))return false;try{new URL(v);return true;}catch(e){return false;}}
-  function rowHtml(f,audio){
-    var badge=audio?' style="background:linear-gradient(135deg,#865ff5,#6944db)"':'';
-    var dl;
-    if(f.download_url){dl='<a class="inline-download" href="'+esc(f.download_url)+'" target="_blank" rel="nofollow noopener"><i class="bi bi-download"></i>Download</a>';}
-    else if(f.prepare_url){dl='<a class="inline-download" href="'+esc(f.prepare_url)+'"><i class="bi bi-download"></i>Download</a>';}
-    else{dl='<span class="inline-download" style="opacity:.45"><i class="bi bi-x-circle"></i>Unavailable</span>';}
-    return '<div class="inline-format-row"><span class="inline-format-badge"'+badge+'>'+esc(f.format)+'</span><span class="inline-format-quality">'+esc(f.quality)+'</span><span class="inline-format-size">'+esc(f.size)+'</span>'+dl+'</div>';
-  }
-  function render(d){
-    var fmts=d.formats||[];
-    var vids=fmts.filter(function(f){return f.type==='Video';});
-    var auds=fmts.filter(function(f){return f.type==='Audio';});
-    var imgs=fmts.filter(function(f){return f.type==='Image';});
-    var media=d.thumbnail?'<img src="'+esc(d.thumbnail)+'" alt="'+esc(d.title)+'" title="'+esc(d.title)+'">':'<div class="inline-media-placeholder"><i class="bi bi-play-circle-fill"></i></div>';
-    var meta='<span><i class="bi bi-globe2"></i>'+esc(d.platform&&d.platform.name)+'</span>'+(d.duration?'<span><i class="bi bi-clock"></i>'+esc(d.duration)+'</span>':'');
-    var panel='';
-    if(imgs.length){panel+='<div class="format-heading"><i class="bi bi-image"></i>Photos</div>'+imgs.map(function(f){return rowHtml(f,false);}).join('');}
-    if(vids.length||!imgs.length){panel+='<div class="format-heading"><i class="bi bi-camera-video-fill"></i>Video</div>'+(vids.length?vids.map(function(f){return rowHtml(f,false);}).join(''):'<div class="inline-empty">No video formats are available for this link.</div>');}
-    if(auds.length){panel+='<div class="format-heading audio"><i class="bi bi-music-note-beamed"></i>Music</div>'+auds.map(function(f){return rowHtml(f,true);}).join('');}
-    box.innerHTML='<section class="inline-result-section" id="download-results"><div class="wrap"><div class="inline-result-heading"><div class="eyebrow"><i class="bi bi-check-circle-fill"></i>&nbsp; Media Found</div><h2>Choose Your Download Format</h2><p class="sub" style="margin:0">Select a video quality or audio format below.</p></div><div class="inline-result-card"><aside class="inline-media">'+media+'<h3>'+esc(d.title)+'</h3><div class="inline-meta">'+meta+'</div></aside><div class="formats-panel">'+panel+'</div></div><p class="result-legal"><i class="bi bi-shield-check"></i>&nbsp; Only download public content you own or have permission to use.</p></div></section>';
-    var r=box.querySelector('#download-results');if(r)r.scrollIntoView({behavior:'smooth',block:'start'});
-  }
-  function loading(){box.innerHTML='<section class="inline-result-section"><div class="wrap"><div class="inline-result-heading"><div class="eyebrow"><span class="sf-spinner"></span>&nbsp; Analyzing link…</div><p class="sub" style="margin:6px 0 0">Fetching available formats, this takes a few seconds.</p></div></div></section>';}
-  function errbox(msg){box.innerHTML='<section class="inline-result-section"><div class="wrap"><div class="inline-result-heading"><div class="eyebrow" style="color:#c0392b"><i class="bi bi-exclamation-triangle-fill"></i>&nbsp; Could not analyze</div><p class="sub" style="margin:6px 0 0">'+esc(msg)+'</p></div></div></section>';}
-  function run(url){
-    url=(url||'').trim();
-    if(!isUrl(url)||busy||url===lastUrl)return;
-    lastUrl=url;busy=true;loading();
-    var body=new FormData();body.append('url',url);body.append('_token',token);
-    fetch(form.getAttribute('action'),{method:'POST',headers:{'X-Requested-With':'XMLHttpRequest','Accept':'application/json'},body:body,credentials:'same-origin'})
-      .then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j};}).catch(function(){return{ok:false,j:null};});})
-      .then(function(res){
-        busy=false;
-        if(res.ok&&res.j&&res.j.ok){render(res.j);}
-        else{var m=(res.j&&(res.j.error||(res.j.errors&&res.j.errors.url&&res.j.errors.url[0])||res.j.message))||'This link could not be processed. Please try another public link.';errbox(m);lastUrl='';}
-      })
-      .catch(function(){busy=false;lastUrl='';errbox('Network error. Please try again.');});
-  }
-  form.addEventListener('submit',function(e){e.preventDefault();run(input.value);});
-  input.addEventListener('paste',function(){setTimeout(function(){run(input.value);},40);});
-  input.addEventListener('change',function(){run(input.value);});
-})();
-</script>
+@include('partials.ajax-downloader')
 @endsection
 @push('head')
 <script type="application/ld+json">{!! json_encode(['@context' => 'https://schema.org', '@type' => 'WebApplication', 'name' => 'Save-Froms Online Video Downloader', 'url' => route('home'), 'applicationCategory' => 'MultimediaApplication', 'operatingSystem' => 'Any (web browser)', 'browserRequirements' => 'Requires a modern web browser', 'offers' => ['@type' => 'Offer', 'price' => '0', 'priceCurrency' => 'USD'], 'featureList' => 'Paste a public video link, compare available MP4, WEBM and MP3 formats, download without an account', 'publisher' => ['@id' => url('/').'#organization']], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}</script>

@@ -42,6 +42,7 @@
 @endforeach<a class="related-card" href="{{ route('supported-sites') }}">All supported sites <i class="bi bi-arrow-right"></i></a></div></section>
 </article></div></section>
 </main>
+@include('partials.ajax-downloader')
 @endsection
 @push('head')
 @if(!empty($page->faq_items))
