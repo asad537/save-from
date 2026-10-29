@@ -8,7 +8,7 @@
 <article class="post-card" lang="{{ $post->language ?: 'en' }}" dir="{{ $post->language === 'ar' ? 'rtl' : 'ltr' }}">
     <a class="post-media" href="{{ route('blog.show', $post->slug) }}" aria-label="Read {{ $post->title }}">
         @if($post->featured_image)
-            <img class="post-image" src="{{ Str::startsWith($post->featured_image, ['http://','https://']) ? $post->featured_image : asset($post->featured_image) }}" alt="Illustration for {{ $post->title }}" title="{{ $post->title }}" width="1280" height="720" loading="lazy" decoding="async">
+            <img class="post-image" src="{{ Str::startsWith($post->featured_image, ['http://','https://']) ? $post->featured_image : asset($post->featured_image).'?v='.optional($post->updated_at)->timestamp }}" alt="Illustration for {{ $post->title }}" title="{{ $post->title }}" width="1280" height="720" loading="lazy" decoding="async">
         @else
             <span class="post-placeholder"><i class="bi bi-journal-richtext"></i></span>
         @endif

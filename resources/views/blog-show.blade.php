@@ -1,6 +1,6 @@
 @extends('layout')
 @php($readingMinutes = max(3, (int) ceil(str_word_count(strip_tags($post->content)) / 220)))
-@php($cover = $post->featured_image ? (Str::startsWith($post->featured_image, ['http://','https://']) ? $post->featured_image : asset($post->featured_image)) : asset('images/hero-landscape.png'))
+@php($cover = $post->featured_image ? (Str::startsWith($post->featured_image, ['http://','https://']) ? $post->featured_image : asset($post->featured_image).'?v='.optional($post->updated_at)->timestamp) : asset('images/hero-landscape.png'))
 @section('content')
 <style>
 .reading-progress{position:fixed;z-index:9999;left:0;top:0;width:0;height:3px;background:linear-gradient(90deg,#2166f3,#27aef2,#7552f5);box-shadow:0 0 12px rgba(33,102,243,.45)}
@@ -24,7 +24,7 @@
     @if($relatedPosts->isNotEmpty())
     <section class="related-guides"><div class="wrap"><header class="related-head"><div><div class="eyebrow"><i class="bi bi-journal-richtext"></i>&nbsp; Keep learning</div><h2>Related media guides</h2></div><a href="{{ route('blog') }}">Browse all articles <i class="bi bi-arrow-right"></i></a></header><div class="related-grid">
         @foreach($relatedPosts as $related)
-        @php($relatedCover = $related->featured_image ? (Str::startsWith($related->featured_image, ['http://','https://']) ? $related->featured_image : asset($related->featured_image)) : asset('images/hero-landscape.png'))
+        @php($relatedCover = $related->featured_image ? (Str::startsWith($related->featured_image, ['http://','https://']) ? $related->featured_image : asset($related->featured_image).'?v='.optional($related->updated_at)->timestamp) : asset('images/hero-landscape.png'))
         <article class="related-card"><a class="related-media" href="{{ route('blog.show', $related->slug) }}" aria-label="Read {{ $related->title }}"><img src="{{ $relatedCover }}" alt="Illustration for {{ $related->title }}" title="{{ $related->title }}" width="1280" height="720" loading="lazy" decoding="async"></a><div class="related-body"><time datetime="{{ optional($related->published_at)->toDateString() }}">{{ optional($related->published_at)->format('M d, Y') }}</time><h3><a href="{{ route('blog.show', $related->slug) }}">{{ $related->title }}</a></h3><a class="related-link" href="{{ route('blog.show', $related->slug) }}">Read guide <i class="bi bi-arrow-right"></i></a></div></article>
         @endforeach
     </div></div></section>

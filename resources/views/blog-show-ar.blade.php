@@ -1,5 +1,5 @@
 @extends('layout')
-@php($cover = $post->featured_image ? (Str::startsWith($post->featured_image, ['http://', 'https://']) ? $post->featured_image : asset($post->featured_image)) : asset('images/hero-landscape.png'))
+@php($cover = $post->featured_image ? (Str::startsWith($post->featured_image, ['http://', 'https://']) ? $post->featured_image : asset($post->featured_image).'?v='.optional($post->updated_at)->timestamp) : asset('images/hero-landscape.png'))
 @section('content')
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap');
