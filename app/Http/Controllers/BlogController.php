@@ -76,6 +76,7 @@ class BlogController extends Controller
             'post' => $post,
             'primaryPage' => $this->primaryPageFor($post),
             'relatedPosts' => $this->relatedPostsFor($post),
+            'toolLinks' => SupportedSite::active()->orderBy('sort_order')->orderBy('name')->get(['name', 'slug']),
             'title' => $post->meta_title ?: $post->title,
             'description' => $post->meta_description ?: ($post->excerpt ?: Str::limit(strip_tags($post->content), 160)),
             'ogImage' => $post->featured_image,
