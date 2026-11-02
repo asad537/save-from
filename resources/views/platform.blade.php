@@ -13,4 +13,8 @@
 @endsection
 @push('head')
 <script type="application/ld+json">{!! json_encode(['@context' => 'https://schema.org', '@type' => 'BreadcrumbList', 'itemListElement' => [['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => route('home')], ['@type' => 'ListItem', 'position' => 2, 'name' => 'Supported Sites', 'item' => route('supported-sites')], ['@type' => 'ListItem', 'position' => 3, 'name' => $site->headlineText(), 'item' => url('/'.$site->slug)]]], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}</script>
+@php($faqItems = $site->faqItems())
+@if($faqItems)
+<script type="application/ld+json">{!! json_encode(['@context' => 'https://schema.org', '@type' => 'FAQPage', 'mainEntity' => array_map(fn ($f) => ['@type' => 'Question', 'name' => $f['q'], 'acceptedAnswer' => ['@type' => 'Answer', 'text' => $f['a']]], $faqItems)], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}</script>
+@endif
 @endpush

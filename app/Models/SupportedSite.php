@@ -166,6 +166,31 @@ class SupportedSite extends Model
             })->take($limit)->values();
     }
 
+    /**
+     * Parse the FAQ accordion (.sf-faq details) out of the description
+     * HTML so the platform page can emit FAQPage structured data.
+     * Returns [['q' => question, 'a' => answer], ...] with tags stripped.
+     */
+    public function faqItems()
+    {
+        $html = (string) $this->description;
+        if (!Str::contains($html, 'sf-faq') || !preg_match('/<div class="sf-faq">(.*?)<\/div>/s', $html, $block)) {
+            return [];
+        }
+
+        preg_match_all('/<details>\s*<summary>(.*?)<\/summary>\s*<p>(.*?)<\/p>/s', $block[1], $matches, PREG_SET_ORDER);
+        $items = [];
+        foreach ($matches as $pair) {
+            $q = trim(html_entity_decode(strip_tags($pair[1]), ENT_QUOTES, 'UTF-8'));
+            $a = trim(html_entity_decode(strip_tags($pair[2]), ENT_QUOTES, 'UTF-8'));
+            if ($q !== '' && $a !== '') {
+                $items[] = ['q' => $q, 'a' => $a];
+            }
+        }
+
+        return $items;
+    }
+
     public function brandIcon()
     {
         $icons = [
