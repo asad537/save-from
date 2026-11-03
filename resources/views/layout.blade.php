@@ -13,7 +13,12 @@
     <link rel="preload" href="{{ asset('fonts/space-grotesk-500-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{{ asset('css/fonts.css') }}?v=20261027">
     <link rel="stylesheet" href="{{ asset('css/icons.css') }}?v=20261027">
+    <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('images/favicon-96x96.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon-16x16.png') }}">
     <link rel="icon" href="{{ asset('images/save-froms-icon.svg') }}" type="image/svg+xml">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/apple-touch-icon.png') }}">
     <link rel="stylesheet" href="{{ asset('css/brand.css') }}">
     @if(($language ?? 'en') !== 'ar')<script src="{{ asset('js/language-switcher.js') }}" defer></script>@endif
     <script src="{{ asset('js/image-attributes.js') }}" defer></script>
