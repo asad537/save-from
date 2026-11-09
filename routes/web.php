@@ -24,13 +24,15 @@ use App\Services\SitemapGenerator;
 Route::get('/', function () {
     return view('home', [
         'homepageContent' => HomepageContent::where('is_active', true)->first(),
+        // NOTE: these must stay word-for-word in sync with the visible FAQ inside the
+        // homepage SEO content (home-seo section) so the FAQPage schema matches what is
+        // rendered. If that FAQ text is edited, update these too.
         'homeFaqs' => [
-            ['q' => 'Is Save-Froms free to use?', 'a' => 'Yes. Save-Froms is completely free and runs in your browser — there is no app to install and no account to create.'],
-            ['q' => 'Do I need to install an app or extension?', 'a' => 'No. Everything works on the website itself, on both mobile and desktop. Just paste a public link and download.'],
-            ['q' => 'Which websites are supported?', 'a' => 'You can paste public links from YouTube, Instagram, TikTok and Facebook, among others. Only publicly accessible videos can be saved.'],
-            ['q' => 'How do I download a video?', 'a' => 'Copy the public video link, paste it into the box at the top of the page, and pick the MP4 or MP3 option you want. The file saves straight to your device.'],
-            ['q' => 'Can I download private videos?', 'a' => 'No. Save-Froms only works with public links. Private, login-only or restricted videos cannot be downloaded by any tool.'],
-            ['q' => 'What formats and quality can I get?', 'a' => 'It depends on the source, but you can usually choose an MP4 video in several resolutions, and for many links an MP3 audio option. The quality matches what the platform stored.'],
+            ['q' => 'Is this video downloader free?', 'a' => 'Yes. There is no account, no subscription and no download limit for ordinary use.'],
+            ['q' => 'Do I need to install an app or extension?', 'a' => 'No. Everything happens in your browser. A site that asks you to install an APK, an .exe or a "helper" extension to download a video is adding risk, not features.'],
+            ['q' => 'Can I download private videos?', 'a' => 'No. A public-link tool can only see what anyone could see without logging in.'],
+            ['q' => 'What is the highest quality I can download?', 'a' => 'Whatever the platform returns for that video: up to 4K on YouTube when the upload is 4K, HD on Facebook when it exists, and the single public rendition on Instagram and TikTok.'],
+            ['q' => 'Where does the file go?', 'a' => "Into your browser's Downloads folder on Android and desktop, and into the Files app on iPhone, from where you can save a video to Photos."],
         ],
         'platforms' => SupportedSite::active()->orderBy('sort_order')->orderBy('name')->get()->map(function ($site) {
             return ['name' => $site->name, 'slug' => $site->slug, 'logo' => $site->logo_url, 'icon' => $site->brandIcon(), 'color' => $site->brandColor()];
